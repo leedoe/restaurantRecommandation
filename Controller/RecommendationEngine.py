@@ -14,7 +14,7 @@ class RecommendationEngine:
         self._restaurantManager = RestaurantManager()
         self._userManager = UserManager()
 
-    def runMapping(self):
+    def runMapping(self, user):
         pass
 
     def isAlreadyEvaluated(self):
