@@ -2,7 +2,7 @@
 
 class Restaurant:
     def __init__(self):
-        self._restaurantID
-        self._name
-        self._location
+        self._restaurantID = int
+        self._name = str
+        self._location = str
         self.foods = []

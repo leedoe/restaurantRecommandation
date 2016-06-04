@@ -2,6 +2,7 @@
 
 class Food:
     def __init__(self):
-        self._foodID
-        self._name
-        self._attributeSetMap
+        self._foodID = int
+        self._name = str
+        self._attributeSetMap = map
+        self._flavors = []

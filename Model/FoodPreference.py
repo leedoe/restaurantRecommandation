@@ -3,6 +3,9 @@
 class FoodPreference:
 
     def __init__(self):
-        self._foodPreferenceID
-        self._food
-        self._score
+        self._foodPreferenceID = int
+        self._food = str
+        self._score = int
+
+    def getScore(self):
+        return self._score
