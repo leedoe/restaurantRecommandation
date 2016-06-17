@@ -1,9 +1,11 @@
+#-*- encoding=utf-8 -*-
+
 from Model.FoodPreference  import FoodPreference
 from Model.Food  import Food
 
 class User:
 
-    def __init__(self, email, password, age, gender, foodPreference):
+    def __init__(self, email, password, age, gender):
         self.email = email
         self.password = password
         self.age = age
@@ -58,26 +60,20 @@ class User:
     def getFoodPreference(self):
         return self.foodPreference
 
-    @userId.setter
     def setUserId(self,userId):
         self.userId = userId
 
-    @email.setter
     def setEmail(self,email):
         self.email = email
 
-    @password.setter
     def setPassword(self,password):
         self.password = password
 
-    @age.setter
     def setAge(self,age):
         self.age = age
 
-    @gender.setter
     def setGender(self,gender):
         self.gender = gender
 
-    @foodPreference.setter
     def setFoodPreference(self,foodPreference):
         self.foodPreference = foodPreference
