@@ -32,48 +32,67 @@ class User:
                 self.foodPreference.remove(foodPreference)
                 break
 
-    @property
-    def getFoodPreference(self):
-        return self.foodPreference
 
     @property
-    def getUserId(self):
-        return self.userId
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
+
+    @email.deleter
+    def email(self):
+        del self._email
+
 
     @property
-    def getEmail(self):
-        return self.email
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, value):
+        self._password = value
+
+    @password.deleter
+    def password(self):
+        del self._password
+
 
     @property
-    def getPassword(self):
-        return self.password
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        self._age = value
+
+    @age.deleter
+    def age(self):
+        del self._age
+
 
     @property
-    def getAge(self):
-        return self.age
+    def gender(self):
+        return self._gender
+
+    @gender.setter
+    def gender(self, value):
+        self._gender = value
+
+    @gender.deleter
+    def gender(self):
+        del self._gender
+
 
     @property
-    def getGender(self):
-        return self.gender
+    def foodPreference(self):
+        return self._foodPreference
 
-    @property
-    def getFoodPreference(self):
-        return self.foodPreference
+    @foodPreference.setter
+    def foodPreference(self,value):
+        self._foodPreference = value
 
-    def setUserId(self,userId):
-        self.userId = userId
-
-    def setEmail(self,email):
-        self.email = email
-
-    def setPassword(self,password):
-        self.password = password
-
-    def setAge(self,age):
-        self.age = age
-
-    def setGender(self,gender):
-        self.gender = gender
-
-    def setFoodPreference(self,foodPreference):
-        self.foodPreference = foodPreference
+    @foodPreference.deleter
+    def foodPreference(self):
+        del self._foodPreference
