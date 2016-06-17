@@ -6,11 +6,11 @@ from Model.Food  import Food
 class User:
 
     def __init__(self, email, password, age, gender):
-        self.email = email
-        self.password = password
-        self.age = age
-        self.gender = gender
-        self.foodPreference = []
+        self._email = email
+        self._password = password
+        self._age = age
+        self._gender = gender
+        self._foodPreference = []
 
     def addPreference(self, foodName, score):
         food = Food(foodName)
@@ -24,14 +24,12 @@ class User:
                 food.setScore(score)
                 break
 
-
     def deletePreference(self, foodName):
         for foodPreference in self.foodPreference:
             food = foodPreference.getFood()
             if food.getName() == foodName:
                 self.foodPreference.remove(foodPreference)
                 break
-
 
     @property
     def email(self):
