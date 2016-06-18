@@ -1,7 +1,6 @@
 #-*- encoding=utf-8 -*-
 
 from Model.FoodPreference  import FoodPreference
-from Model.Food  import Food
 
 class User:
 
@@ -13,23 +12,27 @@ class User:
         self._foodPreference = []
 
     def addPreference(self, foodName, score):
-        food = Food(foodName)
-        foodPreference = FoodPreference(score, food)
-        self.foodPreference.append(foodPreference)
+        #food 이름 중복 검사
+        for foodPreference in self._foodPreference:
+            if foodPreference.foodName == foodName:
+                return False
+        foodPreference = FoodPreference(foodName, score)
+        self._foodPreference.append(foodPreference)
+        return True
 
     def modifyPreference(self, foodName, score):
-        for foodPreference in self.foodPreference:
-            food = foodPreference.getFood()
-            if food.getName() == foodName:
-                food.setScore(score)
-                break
+        for foodPreference in self._foodPreference:
+            if foodPreference.foodName == foodName:
+                foodPreference.score = score
+                return True
+        return False
 
     def deletePreference(self, foodName):
-        for foodPreference in self.foodPreference:
-            food = foodPreference.getFood()
-            if food.getName() == foodName:
-                self.foodPreference.remove(foodPreference)
-                break
+        for foodPreference in self._foodPreference:
+            if foodPreference.foodName == foodName:
+                self._foodPreference.remove(foodPreference)
+                return True
+        return False
 
     @property
     def email(self):
