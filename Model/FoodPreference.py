@@ -7,6 +7,9 @@ class FoodPreference:
         self._foodName = foodName
         self._score = score
 
+    def __repr__(self):
+        return ""+self._foodName + self._score
+
 
     @property
     def foodName(self):
