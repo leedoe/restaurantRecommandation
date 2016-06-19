@@ -8,7 +8,7 @@ class Attribute:
 
     # 음식속성 객체 정보를 출력
     def __repr__(self):
-        return "{음식속성명=%s}" % (self._name)
+        return "Attribute{음식속성명=%s}" % (self._name)
 
     @property
     def name(self):
