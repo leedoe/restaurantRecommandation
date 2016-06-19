@@ -70,7 +70,7 @@ class FoodList:
                 return True
         return False
 
-    # 음식 이름으로 리스트에서 음식 객체 삭제
+    # 음식 이름으로 리스트에서 음식 객체 삭제 _ 성공여부 반환
     def deleteFood(self, name):
         for food in self._foodList:
             if food.name == name:
