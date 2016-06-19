@@ -9,7 +9,7 @@ class FoodPreference:
 
     #음식선호도 객체 정보를 출력
     def __repr__(self):
-        return "{음식명=%s ,선호도 점수=%d}"%(self._foodName,self._score)
+        return "FoodPreference{음식명=%s ,선호도 점수=%d}"%(self._foodName,self._score)
 
     @property
     def foodName(self):
