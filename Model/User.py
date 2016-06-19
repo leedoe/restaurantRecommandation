@@ -2,8 +2,9 @@
 
 from Model.FoodPreference  import FoodPreference
 
+#유저에 대한 정보를 담고 있는 클래스
 class User:
-
+    # 멤버변수:유저 이메일,비밀번호,나이,성별,음식 선호도
     def __init__(self, email, password, age, gender):
         self._email = email
         self._password = password
@@ -11,6 +12,7 @@ class User:
         self._gender = gender
         self._foodPreference = []
 
+    #음식 선호도를 추가하는 함수
     def addPreference(self, foodName, score):
         #food 이름 중복 검사
         for foodPreference in self._foodPreference:
@@ -20,6 +22,7 @@ class User:
         self._foodPreference.append(foodPreference)
         return True
 
+    # 음식 선호도를 음식 이름을 기준으로 점수를 변경하는 함수
     def modifyPreference(self, foodName, score):
         for foodPreference in self._foodPreference:
             if foodPreference.foodName == foodName:
@@ -27,6 +30,7 @@ class User:
                 return True
         return False
 
+    #음식 선호도에서 음식이름을 기준으로 제거하는 함수
     def deletePreference(self, foodName):
         for foodPreference in self._foodPreference:
             if foodPreference.foodName == foodName:
