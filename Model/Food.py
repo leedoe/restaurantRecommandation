@@ -2,14 +2,16 @@
 
 from Model.AttributeSetMap import AttributeSetMap
 
+#음식에 대한 정보를 담고 있는 클래스
 class Food:
-
+    # 멤버변수:음식 id,음식 이름,속성 집합 맵,음식의 맛 리스트
     def __init__(self, foodID, name):
         self._foodID = foodID
         self._name = name
         self._attributeSetMap = AttributeSetMap()
         self._flavors = []
 
+    #음식의 맛을 추가하다
     def addFlavor(self,flavor):
         self._flavors.append(flavor)
 
