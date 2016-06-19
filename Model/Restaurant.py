@@ -4,14 +4,18 @@
 class Restaurant:
     # 멤버변수:식당 id,이름,지역 ,음식 리스트
     def __init__(self, restaurantID, name, location):
-        self.restaurantID = restaurantID
-        self.name = name
-        self.location = location
-        self.foods = []
+        self._restaurantID = restaurantID
+        self._name = name
+        self._location = location
+        self._foods = []
 
     # 음식을 추가하다
     def addFood(self, food):
         self._foods.append(food)
+
+    #식당객체 정보를 출력
+    def __repr__(self):
+        return "{음식ID=%d ,음식명=%s ,지역=%s ,음식개수=%d}"%(self._restaurantID,self._name,self._location,len(self._foods))
 
     @property
     def restaurantID(self):
