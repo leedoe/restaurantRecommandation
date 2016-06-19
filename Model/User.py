@@ -40,7 +40,7 @@ class User:
 
     #유저객체 정보를 출력
     def __repr__(self):
-        return "{이메일=%s ,비밀번호=%s ,나이=%d ,성별=%s ,음식선호도 개수=%d}"%(self._email,self._password,self._age,self._gender,len(self._foodPreference))
+        return "User{이메일=%s ,비밀번호=%s ,나이=%d ,성별=%s ,음식선호도 개수=%d}"%(self._email,self._password,self._age,self._gender,len(self._foodPreference))
 
     @property
     def email(self):
