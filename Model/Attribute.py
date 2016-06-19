@@ -6,6 +6,10 @@ class Attribute:
     def __init__(self,name):
         self._name = name
 
+    # 음식속성 객체 정보를 출력
+    def __repr__(self):
+        return "{음식속성명=%s}" % (self._name)
+
     @property
     def name(self):
         return self._name
