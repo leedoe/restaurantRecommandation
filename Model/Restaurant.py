@@ -9,6 +9,10 @@ class Restaurant:
         self.location = location
         self.foods = []
 
+    # 음식을 추가하다
+    def addFood(self, food):
+        self._foods.append(food)
+
     @property
     def restaurantID(self):
         return self._restaurantID
