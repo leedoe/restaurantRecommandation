@@ -17,7 +17,7 @@ class Food:
 
     # 음식객체 정보를 출력
     def __repr__(self):
-        return "{음식ID=%d ,음식명=%s ,속성 집합 맵=%s ,음식맛 개수=%d}"%(self._foodID,self._name,self._attributeSetMap,len(self._flavors))
+        return "Food{음식ID=%d ,음식명=%s ,속성 집합 맵=%s ,음식맛 개수=%d}"%(self._foodID,self._name,self._attributeSetMap,len(self._flavors))
 
     @property
     def name(self):
