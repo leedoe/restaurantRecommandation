@@ -1,23 +1,22 @@
 #-*- encoding=utf-8 -*-
 
-from Model.AttributeSetMap import AttributeSetMap
+from Model.AttributeSet import AttributeSet
 
 #음식에 대한 정보를 담고 있는 클래스
 class Food:
-    # 멤버변수:음식 id,음식 이름,속성 집합 맵,음식의 맛 리스트
+    # 멤버변수:음식 id,음식 이름,속성 집합 맵
     def __init__(self, foodID, name):
         self._foodID = foodID
         self._name = name
-        self._attributeSetMap = AttributeSetMap()
-        self._flavors = []
+        self._attributeDict = {}
 
-    #음식의 맛을 추가하다
-    def addFlavor(self,flavor):
-        self._flavors.append(flavor)
+    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장
+    def addAttribute(self,attributeName,attributes):
+        self._attributeDict[attributeName] = attributes
 
     # 음식객체 정보를 출력
     def __repr__(self):
-        return "Food{음식ID=%d ,음식명=%s ,속성 집합 맵=%s ,음식맛 개수=%d}"%(self._foodID,self._name,self._attributeSetMap,len(self._flavors))
+        return "Food{음식ID=%d ,음식명=%s ,음식맛 개수=%d}"%(self._foodID,self._name,len(self._flavors))
 
     @property
     def name(self):
@@ -46,27 +45,15 @@ class Food:
 
 
     @property
-    def attributeSetMap(self):
-        return self._attributeSetMap
+    def attributeDict(self):
+        return self._attributeDict
 
-    @attributeSetMap.setter
-    def attributeSetMap(self, value):
-        self._attributeSetMap = value
+    @attributeDict.setter
+    def attributeDict(self, value):
+        self._attributeDict = value
 
-    @attributeSetMap.deleter
-    def attributeSetMap(self):
-        del self._attributeSetMap
+    @attributeDict.deleter
+    def attributeDict(self):
+        del self._attributeDict
 
-
-    @property
-    def flavors(self):
-        return self._flavors
-
-    @flavors.setter
-    def flavors(self,value):
-        self._flavors = value
-
-    @flavors.deleter
-    def flavors(self):
-        del self._flavors
 
