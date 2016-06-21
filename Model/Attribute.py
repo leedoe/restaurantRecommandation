@@ -1,6 +1,7 @@
 #-*- encoding=utf-8 -*-
 
 #음식속성에 대한 정보를 담고 있는 클래스
+
 class Attribute:
     # 멤버변수:속성 이름
     def __init__(self,name):
