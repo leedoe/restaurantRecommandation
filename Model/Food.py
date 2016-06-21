@@ -2,16 +2,22 @@
 
 from Model.AttributeSetMap import AttributeSetMap
 
+#음식에 대한 정보를 담고 있는 클래스
 class Food:
-
+    # 멤버변수:음식 id,음식 이름,속성 집합 맵,음식의 맛 리스트
     def __init__(self, foodID, name):
         self._foodID = foodID
         self._name = name
         self._attributeSetMap = AttributeSetMap()
         self._flavors = []
 
+    #음식의 맛을 추가하다
     def addFlavor(self,flavor):
         self._flavors.append(flavor)
+
+    # 음식객체 정보를 출력
+    def __repr__(self):
+        return "Food{음식ID=%d ,음식명=%s ,속성 집합 맵=%s ,음식맛 개수=%d}"%(self._foodID,self._name,self._attributeSetMap,len(self._flavors))
 
     @property
     def name(self):
