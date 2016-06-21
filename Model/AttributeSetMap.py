@@ -15,7 +15,7 @@ class AttributeSetMap:
         return map[attributeSetCode]
 
     def searchElementInAttributeSet(self, attributeSetCode, element):
-        list = list(map[attributeSetCode])
+        list = enumerate(map[attributeSetCode])
         for i in list:
             if element == i:
                 return True
