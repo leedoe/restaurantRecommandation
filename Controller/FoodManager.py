@@ -10,8 +10,8 @@ class FoodManager:
     __metaclass__ = Singleton
 
     def __init__(self):
-        self.foodList = []
-        self.foodDBManager
+        self._foodList = []
+        self._foodDBManager = FoodDBManager()
 
     def makeFood(self, name, attributeSetMap):
         food = Food(name, attributeSetMap)
@@ -65,9 +65,21 @@ class FoodManager:
         return self._foodList
 
     @foodList.setter
-    def foodList(self, foodList):
-        self._foodList = foodList
+    def foodList(self, value):
+        self._foodList = value
 
     @foodList.deleter
     def foodList(self):
         del self._foodList
+
+    @property
+    def foodDBManager(self):
+        return self._foodDBManager
+
+    @foodDBManager.setter
+    def foodDBManager(self, value):
+        self._foodDBManager = value
+
+    @foodDBManager.deleter
+    def foodDBManager(self):
+        del self._foodDBManager
