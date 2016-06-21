@@ -1,7 +1,8 @@
 #-*- encoding=utf-8 -*-
 
+#음식속성집합을 딕셔너리로 관리하는 클래스
 class AttributeSetMap:
-
+    # 멤버변수:음식속성집합 딕셔너리
     def __init__(self):
         self._map = {}
 
