@@ -15,7 +15,7 @@ class Restaurant:
 
     #식당객체 정보를 출력
     def __repr__(self):
-        return "Restaurant{음식ID=%d ,음식명=%s ,지역=%s ,음식개수=%d}"%(self._restaurantID,self._name,self._location,len(self._foods))
+        return "Restaurant{식당ID=%d ,식당명=%s ,지역=%s ,음식개수=%d}"%(self._restaurantID,self._name,self._location,len(self._foods))
 
     @property
     def restaurantID(self):
