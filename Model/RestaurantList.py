@@ -33,20 +33,6 @@ class RestaurantList:
                 restaurantList.append(restaurant)
         return restaurantList
 
-    #음식리스트로 식당객체 검색 _ 검색된 객체리스트 반환(수정 해야 함)
-    def searchRestaurantByFoods(self, foods):
-        foods.sort()
-        for restaurant in self._restaurantList:
-            if len(restaurant.foods) == len(foods):
-                restaurant.foods.sort()
-                count = 0
-                for food in foods , restaurant.foods:
-                    if food.name == restaurant.foods.name:
-                        count+=1
-                    else:
-                        break
-                if count == len(foods):
-                    return restaurant
 
     # 음식명으로 식당객체  검색 _ 검색된 식당객체 리스트 반환
     def searchRestaurantByFoodnName(self,foodName):
