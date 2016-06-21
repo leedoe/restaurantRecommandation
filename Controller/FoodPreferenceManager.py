@@ -3,6 +3,7 @@
 from Model.Singleton import Singleton
 from Controller.FoodPreferenceDBManager import FoodPreferenceDBManager
 
+
 #음식선호도 객체를 관리하는 매니저 클래스
 class FoodPreferenceManager:
     __metaclass__ = Singleton
