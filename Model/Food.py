@@ -8,11 +8,11 @@ class Food:
     def __init__(self, foodID, name):
         self._foodID = foodID
         self._name = name
-        self._attributeDict = {}
+        self._attributeSetDict = {}
 
     #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장
     def addAttribute(self,attributeName,attributes):
-        self._attributeDict[attributeName] = attributes
+        self._attributeSetDict[attributeName] = attributes
 
     # 음식객체 정보를 출력
     def __repr__(self):
@@ -45,15 +45,15 @@ class Food:
 
 
     @property
-    def attributeDict(self):
-        return self._attributeDict
+    def attributeSetDict(self):
+        return self._attributeSetDict
 
-    @attributeDict.setter
+    @attributeSetDict.setter
     def attributeDict(self, value):
-        self._attributeDict = value
+        self._attributeSetDict = value
 
-    @attributeDict.deleter
-    def attributeDict(self):
-        del self._attributeDict
+    @attributeSetDict.deleter
+    def attributeSetDict(self):
+        del self._attributeSetDict
 
 
