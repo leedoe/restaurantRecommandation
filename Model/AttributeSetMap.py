@@ -4,50 +4,50 @@
 class AttributeSetMap:
     # 멤버변수:음식속성집합 딕셔너리
     def __init__(self):
-        self._map = {}
+        self._attSetMap = {}
 
     def addAttributeSet(self, attributeSetCode, attributeSet):
-        map[attributeSetCode] = attributeSet
+        self._attSetMap[attributeSetCode] = attributeSet
 
     def addElementInAttributeSet(self, attributeSetCode, element):
-        map[attributeSetCode].add(element)
+        self._attSetMap[attributeSetCode].add(element)
 
     def searchAttributeSet(self, attributeSetCode):
-        return map[attributeSetCode]
+        return self._attSetMap[attributeSetCode]
 
     def searchElementInAttributeSet(self, attributeSetCode, element):
-        list = enumerate(map[attributeSetCode])
+        list = enumerate(self._attSetMap[attributeSetCode])
         for i in list:
             if element == i:
                 return True
         return False
 
     def modifyAttributeSetCode(self, oldAttributeSetCode, newAttributeSetCode):
-        map[newAttributeSetCode] = map[oldAttributeSetCode]
-        del map[oldAttributeSetCode]
+        self._attSetMap[newAttributeSetCode] = self._attSetMap[oldAttributeSetCode]
+        del self._attSetMap[oldAttributeSetCode]
 
     def modifyElementInAttributeSet(self, attributeSetCode, newElement):
-        map[attributeSetCode] = newElement
+        self._attSetMap[attributeSetCode] = newElement
 
     def deleteAttributeSet(self, attributeSetCode):
-        del map[attributeSetCode]
+        del self._attSetMap[attributeSetCode]
 
     def deleteElementInAttributeSet(self, attributeSetCode, element):
-        list = list(map[attributeSetCode])
+        list = enumerate(self._attSetMap[attributeSetCode])
         for i in list:
             if element == i:
                 del list[i]
                 break
 
     @property
-    def map(self):
-        return self._map
+    def attSetMap(self):
+        return self.self._attSetMap
 
-    @map.setter
-    def map(self,value):
-        self._map = value
+    @attSetMap.setter
+    def attSetMap(self,value):
+        self.self._attSetMap = value
 
-    @map.deleter
-    def map(self):
-        del self._map
+    @attSetMap.deleter
+    def attSetMap(self):
+        del self.self._attSetMap
 
