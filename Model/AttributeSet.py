@@ -17,7 +17,6 @@ class AttributeSet:
     def removeAttribute(self,attribute):
         self._attributeSet.remove(attribute)
 
-
     @property
     def attributeSetID(self):
         return self._attributeSetID
