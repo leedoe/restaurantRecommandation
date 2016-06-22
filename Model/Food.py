@@ -10,7 +10,7 @@ class Food:
         self._name = name
         self._attributeSetDict = {}
 
-    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장(음식이름,음식속성 집합)
+    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장(음식이름(키),음식속성 집합(값))
     def addAttribute(self,attributeName,attributeSet):
         self._attributeSetDict[attributeName] = attributeSet
 
