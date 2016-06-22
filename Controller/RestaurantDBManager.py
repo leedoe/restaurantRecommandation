@@ -1,4 +1,8 @@
-class RestaurantDBManager:
+# -*- encoding=utf-8 -*-
+
+from Model.Singleton import Singleton
+
+class RestaurantDBManager(metaclass=Singleton):
     # db에 user정보 삽입
     def insertRestaurant(self, restaurant):
         pass

@@ -6,8 +6,8 @@ from Model.RestaurantList import RestaurantList
 from Controller.RestaurantDBManager import RestaurantDBManager
 
 #식당 객체를 관리하는 매니저 클래스
-class RestaurantManager:
-    __metaclass__ = Singleton
+class RestaurantManager(metaclass=Singleton):
+
     # 멤버변수:식당 객체 리스트 객체,식당db매니저 객체
     def __init__(self):
         self._restaurantList = RestaurantList()

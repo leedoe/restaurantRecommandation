@@ -6,8 +6,7 @@ from Controller.UserDBManager import UserDBManger
 
 #유저 객체를 관리하는 매니저 클래스
 
-class UserManager:
-    __metaclass__ = Singleton
+class UserManager(metaclass=Singleton):
 
     def __init__(self):
         self._userDBManager = UserDBManger()

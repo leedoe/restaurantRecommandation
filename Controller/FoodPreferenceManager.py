@@ -5,16 +5,23 @@ from Controller.FoodPreferenceDBManager import FoodPreferenceDBManager
 
 
 #음식선호도 객체를 관리하는 매니저 클래스
-class FoodPreferenceManager:
-    __metaclass__ = Singleton
+class FoodPreferenceManager(metaclass=Singleton):
 
     def __init__(self):
         self._foodPreferenceDBManger = FoodPreferenceDBManager()
 
-    def getUsersByFoodName(self, foodName):
-        self._foodPreferenceDBManger.searchUsersByFoodName(foodName)
-        return
+    def getUserIDsByFoodID(self, foodID):
+        '''
+        해당 음식 ID를 이용하여 해당 음식을 선호하는 사용자의 목록을 반환
+        :param foodID: 음식 ID
+        :return: User ID(integer)의 list
+        '''
+        return self._foodPreferenceDBManger.searchUserIDsByFoodID(foodID)
 
-    def getFoodsByUserID(self, userID):
-        self._foodPreferenceDBManger.searchFoodsByUserID(userID)
-        return
+    def getFoodPreferencesByUserID(self, userID):
+        '''
+        해당 사용자의 음식 선호를 반환
+        :param userID: 사용자ID
+        :return: FoodPreference instance의 list
+        '''
+        return self._foodPreferenceDBManger.searchFoodPreferencesByUserID(userID)

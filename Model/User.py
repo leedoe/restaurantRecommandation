@@ -5,17 +5,16 @@ from Model.FoodPreference  import FoodPreference
 #유저에 대한 정보를 담고 있는 클래스
 class User:
     # 멤버변수:유저 이메일,비밀번호,나이,성별,음식 선호도
-    def __init__(self, email, password, age, gender):
-        self._ID = int()
-        self._email = str()
-        self._password = str()
-        self._age = int()
-        self._gender = gender
+    def __init__(self, ID, email, password, age):
+        self._ID = ID
+        self._email = email
+        self._password = password
+        self._age = age
 
 
     #유저객체 정보를 출력
     def __repr__(self):
-        return "User{사용자ID=%d, 이메일=%s ,비밀번호=%s ,나이=%d"%(self._ID, self._email,self._password,self._age)
+        return "User{사용자ID=%d, 이메일=%s ,비밀번호=%s ,나이=%d"%(self._ID, self._email, self._password, self._age)
 
 
     @property

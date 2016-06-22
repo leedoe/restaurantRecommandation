@@ -1,4 +1,9 @@
-class UserDBManger:
+# -*- encoding=utf-8 -*-
+
+from Model.Singleton import Singleton
+
+class UserDBManger(metaclass=Singleton):
+
     # db에 user정보 삽입
     def insertUser(self,user):
         pass
