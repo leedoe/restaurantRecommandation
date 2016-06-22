@@ -6,6 +6,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'', views.main_page),
+    url(r'^$', 'django.contrib.auth.views.login', name='login'),
 ]
 
