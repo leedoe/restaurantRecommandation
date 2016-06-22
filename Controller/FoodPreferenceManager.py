@@ -9,23 +9,12 @@ class FoodPreferenceManager:
     __metaclass__ = Singleton
 
     def __init__(self):
-        self._foodPreferenceDBManger=FoodPreferenceDBManager()
+        self._foodPreferenceDBManger = FoodPreferenceDBManager()
 
-    def getUsersByFoodName(self,foodName):
-        self.foodPreferenceDBManger.searchUsersByFoodName(foodName)
+    def getUsersByFoodName(self, foodName):
+        self._foodPreferenceDBManger.searchUsersByFoodName(foodName)
+        return
 
-    def getFoodsByUserID(self,id):
-        self.foodPreferenceDBManger.searchFoodsByUserID(id)
-
-
-    @property
-    def foodPreferenceDBManger(self):
-        return self._foodPreferenceDBManger
-
-    @foodPreferenceDBManger.setter
-    def foodPreferenceDBManger(self,value):
-        self._foodPreferenceDBManger =value
-
-    @foodPreferenceDBManger.deleter
-    def foodPreferenceDBManger(self, value):
-        del self._foodPreferenceDBManger
+    def getFoodsByUserID(self, userID):
+        self._foodPreferenceDBManger.searchFoodsByUserID(userID)
+        return

@@ -13,6 +13,23 @@ class FoodManager:
         self._foodList = FoodList()
         self._foodDBManager = FoodDBManager()
 
+
+    def getFoodPreferenceAttributesByUserID(self, userID):
+        '''
+
+        :param userID: 사용자의 ID(기본키)
+        :return: 해당 사용자의 선호 음식의 속성들을 가지고 있는 리스트, 해당 속성들은 dictionaries 타입
+        '''
+        return {}
+
+    def getFoodAttributesByFoodName(self, foodName):
+        '''
+
+        :param foodName: 음식의 이름
+        :return: 해당 음식의 속성, dictionaries 타입
+        '''
+        return []
+
     #음식객체를 생성하여 리스트에 추가
     def makeFood(self, foodId, foodName):
         food = Food(foodId, foodName)

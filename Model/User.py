@@ -6,41 +6,22 @@ from Model.FoodPreference  import FoodPreference
 class User:
     # 멤버변수:유저 이메일,비밀번호,나이,성별,음식 선호도
     def __init__(self, email, password, age, gender):
-        self._email = email
-        self._password = password
-        self._age = age
+        self._ID = int()
+        self._email = str()
+        self._password = str()
+        self._age = int()
         self._gender = gender
-        self._foodPreference = []
 
-    #음식 선호도를 추가하는 함수
-    def addPreference(self, foodName, score):
-        #food 이름 중복 검사
-        for foodPreference in self._foodPreference:
-            if foodPreference.foodName == foodName:
-                return False
-        foodPreference = FoodPreference(foodName, score)
-        self._foodPreference.append(foodPreference)
-        return True
-
-    # 음식 선호도를 음식 이름을 기준으로 점수를 변경하는 함수
-    def modifyPreference(self, foodName, score):
-        for foodPreference in self._foodPreference:
-            if foodPreference.foodName == foodName:
-                foodPreference.score = score
-                return True
-        return False
-
-    #음식 선호도에서 음식이름을 기준으로 제거하는 함수
-    def deletePreference(self, foodName):
-        for foodPreference in self._foodPreference:
-            if foodPreference.foodName == foodName:
-                self._foodPreference.remove(foodPreference)
-                return True
-        return False
 
     #유저객체 정보를 출력
     def __repr__(self):
-        return "User{이메일=%s ,비밀번호=%s ,나이=%d ,성별=%s ,음식선호도 개수=%d}"%(self._email,self._password,self._age,self._gender,len(self._foodPreference))
+        return "User{사용자ID=%d, 이메일=%s ,비밀번호=%s ,나이=%d"%(self._ID, self._email,self._password,self._age)
+
+
+    @property
+    def ID(self):
+        return self._ID
+
 
     @property
     def email(self):
@@ -79,29 +60,3 @@ class User:
     @age.deleter
     def age(self):
         del self._age
-
-
-    @property
-    def gender(self):
-        return self._gender
-
-    @gender.setter
-    def gender(self, value):
-        self._gender = value
-
-    @gender.deleter
-    def gender(self):
-        del self._gender
-
-
-    @property
-    def foodPreference(self):
-        return self._foodPreference
-
-    @foodPreference.setter
-    def foodPreference(self,value):
-        self._foodPreference = value
-
-    @foodPreference.deleter
-    def foodPreference(self):
-        del self._foodPreference
