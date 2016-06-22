@@ -8,57 +8,80 @@ from Controller.FoodDBManager import FoodDBManager
 #음식 객체를 관리하는 매니저 클래스
 class FoodManager:
     __metaclass__ = Singleton
-
+    # 멤버변수:음식 객체 리스트,음식db매니저
     def __init__(self):
-        self._foodList = []
+        self._foodList = FoodList()
         self._foodDBManager = FoodDBManager()
 
-    def makeFood(self, name, attributeSetMap):
-        food = Food(name, attributeSetMap)
-        self.foodList.foodList.append(food)
+    #음식객체를 생성하여 리스트에 추가
+    def makeFood(self, foodId, foodName):
+        food = Food(foodId, foodName)
+        self._foodList.addFoodByFood(food)
 
+    #음식이름으로 리스트에서 음식객체를 반환
     def searchFood(self, foodName):
-        for food in self.foodList.foodList:
-            if food.getName() == foodName:
-                return food
+        return self._foodList.searchFoodByName(foodName)
 
+    # 음식이름으로 리스트에서 음식객체를 삭제
     def deleteFood(self, foodName):
-        for food in self.foodList.foodList:
-            if food.getName() == foodName:
-                self.foodList.foodList.remove(food)
+        self._foodList.deleteFood(foodName)
 
-    def compareFoodAttribute(self, foodNameA, foodNameB, attributeSetCodeA, attributeSetCodeB):
-        attributeSetMapA = foodNameA.getAttributeSetMap()
-        attributeSetMapB = foodNameB.getAttributeSetMap()
-        if (attributeSetMapA[attributeSetCodeA] == attributeSetMapB[attributeSetCodeB]):
-            return True
-        return False
+    # 2개의 음식속성값을 비교(음식1 이름,음식2 이름,음식1 속성이름(키),음식2 속성이름(키))
+    def compareFoodAttributeValue(self, foodNameA, foodNameB, attributeNameA, attributeNameB):
+        foodA = self._foodList.searchFoodByName(foodNameA)
+        foodB = self._foodList.searchFoodByName(foodNameB)
+        #음식에 속성이름(키)값이 존재하지 않을 경우 거짓
+        if attributeNameA not in foodA.attributeDict or attributeNameB not in foodB.attributeDict:
+            return False
+        attributeSetA = foodA.attributeDict[attributeNameA]
+        attributeSetB = foodB.attributeDict[attributeNameB]
+        listA = list(attributeSetA)
+        listB = list(attributeSetB)
+        listA.sort()
+        listB.sort()
+        if len(listA) != len(listB):#속성개수가 같지 않을 경우 거짓
+            return False
+        else:
+            for i in range(0,len(listA)):
+                if(listA[i] != listB[i]):#속성값이 다를 경우 거짓
+                    return False
+        return True
 
-    def intersectionFoodAttribute(self, foodNameA, foodNameB, attributeSetCodeA, attributeSetCodeB):  # 교집합 찾기
-        for food in self.foodList.foodList:
-            if food.name == foodNameA:
-                attributeSetMapA = food.attributeSetMap
-            if food.name == foodNameB:
-                attributeSetMapB = food.attributeSetMap
-        return attributeSetMapA[attributeSetCodeA].intersection(attributeSetMapB[attributeSetCodeB])
+    # 2개의 음식의 사전에 있는 모든 음식 속성키에 해당하는 속성값을  비교(음식1 이름,음식2 이름,음식1 )
+    def compareFoodAttributeKey(self, foodNameA, foodNameB):
+        foodA = self._foodList.searchFoodByName(foodNameA)
+        foodB = self._foodList.searchFoodByName(foodNameB)
+        keyListA = list(foodA.attributeDict.keys())
+        keyListB = list(foodB.attributeDict.keys())
+        if len(keyListA) != len(keyListB):  # 속성키 개수가 같지 않을 경우 거짓
+            return False
+        else:
+            keyListA.sort()
+            keyListB.sort()
+            for i in range(0, len(keyListA)):
+                if (keyListA[i] != keyListB[i]):  # 속성키가 다를 경우 거짓
+                    return False
+                else:
+                    if self.compareFoodAttributeValue(foodNameA, foodNameB, keyListA[i], keyListB[i]) == False:
+                        return False
+        return True
 
-    def intersectionFoodAttribute(self, foodA, foodB, attributeSetCodeA, attributeSetCodeB):
-        attributeSetMapA = foodA.attributeSetMap
-        attributeSetMapB = foodB.attributeSetMap
-        return attributeSetMapA[attributeSetCodeA].intersection(attributeSetMapB[attributeSetCodeB])
+    # 음식 속성갑(집합)의 교집합 찾기(음식1 이름,음식2 이름,음식1 속성 키,음식2 속성 키)
+    def intersectionFoodAttribute(self, foodNameA, foodNameB, attributeNameA, attributeNameB):
+        foodA = self._foodList.searchFoodByName(foodNameA)
+        foodB = self._foodList.searchFoodByName(foodNameB)
+        attributeSetA = foodA.attributeDict[attributeNameA]
+        attributeSetB = foodB.attributeDict[attributeNameB]
+        return attributeSetA.intersection(attributeSetB)
 
-    def unionFoodAttribute(self, foodNameA, foodNameB, attributeSetCodeA, attributeSetCodeB):  # 합집합 찾기
-        for food in self.foodList.foodList:
-            if food.name == foodNameA:
-                attributeSetMapA = food.attributeSetMap
-            if food.name == foodNameB:
-                attributeSetMapB = food.attributeSetMap
-        return attributeSetMapA[attributeSetCodeA].union(attributeSetMapB[attributeSetCodeB])
+    # 음식 속성갑(집합)의 합집합 찾기(음식1 이름,음식2 이름,음식1 속성 키,음식2 속성 키)
+    def unionFoodAttribute(self, foodNameA, foodNameB, attributeNameA, attributeNameB):
+        foodA = self._foodList.searchFoodByName(foodNameA)
+        foodB = self._foodList.searchFoodByName(foodNameB)
+        attributeSetA = foodA.attributeDict[attributeNameA]
+        attributeSetB = foodB.attributeDict[attributeNameB]
+        return attributeSetA.union(attributeSetB)
 
-    def unionFoodAttribute(self, foodA, foodB, attributeSetCodeA, attributeSetCodeB):
-        attributeSetMapA = foodA.attributeSetMap
-        attributeSetMapB = foodB.attributeSetMap
-        return attributeSetMapA[attributeSetCodeA].union(attributeSetMapB[attributeSetCodeB])
 
     @property
     def foodList(self):
