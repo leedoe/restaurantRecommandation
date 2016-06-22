@@ -11,7 +11,13 @@ class Restaurant:
 
     # 음식을 추가하다
     def addFood(self, food):
+        #기존에 음식이 있는지 확인 있으면 거짓 반환
+        for foodTmp in self._foods:
+            if foodTmp.name == food.name:
+                return False
+        #없으면 음식 추가
         self._foods.append(food)
+        return True
 
     #식당객체 정보를 출력
     def __repr__(self):

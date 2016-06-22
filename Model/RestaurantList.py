@@ -35,7 +35,7 @@ class RestaurantList:
 
 
     # 음식명으로 식당객체  검색 _ 검색된 식당객체 리스트 반환
-    def searchRestaurantByFoodnName(self,foodName):
+    def searchRestaurantByFoodName(self,foodName):
         restaurantList = []
         for restaurant in self._restaurantList:
             foods =  restaurant.foods
@@ -74,8 +74,16 @@ class RestaurantList:
         for restaurant in self._restaurantList:
             if restaurant.name == name:
                 self._restaurantList.remove(restaurant)
-                break
+                return True
+        return False
 
+    # 식당 이름과 주소로 리스트에서 식당 객체 삭제 _ 성공여부 반환
+    def deleteRestaurantByNameAndLocation(self, name,location):
+        for restaurant in self._restaurantList:
+            if restaurant.name == name and restaurant.location == location:
+                self._restaurantList.remove(restaurant)
+                return True
+        return False
 
     @property
     def restaurantList(self):
