@@ -74,14 +74,16 @@ class RestaurantList:
         for restaurant in self._restaurantList:
             if restaurant.name == name:
                 self._restaurantList.remove(restaurant)
-                break
+                return True
+        return False
 
     # 식당 이름과 주소로 리스트에서 식당 객체 삭제 _ 성공여부 반환
     def deleteRestaurantByNameAndLocation(self, name,location):
         for restaurant in self._restaurantList:
             if restaurant.name == name and restaurant.location == location:
                 self._restaurantList.remove(restaurant)
-                break
+                return True
+        return False
 
     @property
     def restaurantList(self):
