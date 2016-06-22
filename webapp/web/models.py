@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 # UserInformation
 class UserInfo(AbstractUser):
     age = models.IntegerField(null=False)
-    location = models.CharField()
+    location = models.CharField(max_length=250)
 
     def __str__(self):
         return self.username
@@ -16,7 +16,7 @@ class UserInfo(AbstractUser):
 
 # Food Information
 class Food(models.Model):
-    name = models.CharField(null=False)
+    name = models.CharField(null=False, max_length=100)
 
     def __str__(self):
         return self.name
@@ -25,8 +25,8 @@ class Food(models.Model):
 # Food Attribute
 class FoodAttribute(models.Model):
     foodID = models.ForeignKey(Food)
-    attributeName = models.CharField()
-    contents = models.CharField()
+    attributeName = models.CharField(max_length=100)
+    contents = models.CharField(max_length=250)
 
     def __str__(self):
         return str(self.foodID) + " " + self.attributeName
@@ -44,8 +44,8 @@ class UserFoodPreference(models.Model):
 
 # Restaurant
 class Restaurant(models.Model):
-    name = models.CharField()
-    location = models.CharField()
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
