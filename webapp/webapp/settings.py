@@ -85,6 +85,8 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'ssu310',
         'PASSWORD': 'soongsil',
+        'HOST': 'project.czpuraarclth.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306'
     }
 }
 
