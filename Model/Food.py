@@ -10,9 +10,9 @@ class Food:
         self._name = name
         self._attributeSetDict = {}
 
-    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장
-    def addAttribute(self,attributeName,attributes):
-        self._attributeSetDict[attributeName] = attributes
+    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장(음식이름,음식속성 집합)
+    def addAttribute(self,attributeName,attributeSet):
+        self._attributeSetDict[attributeName] = attributeSet
 
     # 음식객체 정보를 출력
     def __repr__(self):
