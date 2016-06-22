@@ -17,24 +17,46 @@ class RestaurantManager:
     def addRestaurant(self,id,name,location,foods):
         restaurant = Restaurant(id,name, location)
         restaurant.foods = foods
-        self.restaurantList.addRestaurant(restaurant)
+        self._restaurantList.addRestaurant(restaurant)
+
+    #식당에 음식 추가
+    def addFoodToRestaurant(self,restaurantName,food):
+        self._restaurantList.searchRestaurantByName(restaurantName).addFood(food)
 
     #식당 이름 변경
     def modifyRestaurantByName(self, name, newName):
-        return self.restaurantList.modifyRestaurantByName(name,newName)
+        return self._restaurantList.modifyRestaurantByName(name,newName)
 
     #식당 주소 변경
     def modifyRestaurantByLocation(self,name,location):
-        return self.restaurantList.modifyRestaurantByLocation(name,location)
+        return self._restaurantList.modifyRestaurantByLocation(name,location)
 
     #식당 음식들 변경
     def modifyRestaurantByFoods(self, name, foods):
-        return self.restaurantList.modifyRestaurantByFoods(name,foods)
+        return self._restaurantList.modifyRestaurantByFoods(name,foods)
 
-    #식당 삭제
-    def deleteRestaurantByName(self,name):
-        return self.restaurantList.deleteRestaurantByName(name)
+    # 식당 이름으로 식당객체 삭제
+    def deleteRestaurantByName(self, name):
+        return self._restaurantList.deleteRestaurantByName(name)
 
+    # 식당 이름과 주소로 식당객체 삭제
+    def deleteRestaurantByNameAndLocation(self, name,location):
+        return self._restaurantList.deleteRestaurantByNameAndLocation(name,location)
+
+    #식당 주소와 음식으로 식당객체 반환
+    def searchRestaurantByLocationAndFood(self,location,food):
+        restaurantList = self._restaurantList.searchRestaurantByLocation(location)
+        tmpList = []
+        for res in restaurantList:
+            for foodTmp in res.foods:
+                if foodTmp.name == food.name:
+                    tmpList.append(res)
+                    break
+        return tmpList
+
+    #식당 이름으로 리스트에서 식당객체 반환
+    def searchRestaurantByName(self,name):
+        return self._restaurantList.searchRestaurantByName(name)
 
     @property
     def restaurantList(self):
