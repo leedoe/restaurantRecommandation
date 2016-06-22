@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 
 # UserInformation
 class UserInfo(AbstractUser):
-    age = models.IntegerField(null=False)
+    age = models.IntegerField()
     location = models.CharField(max_length=250)
 
     def __str__(self):
