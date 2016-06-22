@@ -8,39 +8,55 @@ from Controller.RestaurantDBManager import RestaurantDBManager
 #식당 객체를 관리하는 매니저 클래스
 class RestaurantManager:
     __metaclass__ = Singleton
-
+    # 멤버변수:식당 객체 리스트 객체,식당db매니저 객체
     def __init__(self):
-        self._restaurantList = []
+        self._restaurantList = RestaurantList()
         self._restaurantDBManager = RestaurantDBManager()
 
-    def addRestaurant(self,name,location,foods):
-        restaurant = Restaurant(name, location, foods)
-        self.restaurantList.restaurantList.append(restaurant)
+    #식당정보로 식당객체 리스트에 추가
+    def addRestaurant(self,id,name,location,foods):
+        restaurant = Restaurant(id,name, location)
+        restaurant.foods = foods
+        self._restaurantList.addRestaurant(restaurant)
 
+    #식당에 음식 추가
+    def addFoodToRestaurant(self,restaurantName,food):
+        self._restaurantList.searchRestaurantByName(restaurantName).addFood(food)
+
+    #식당 이름 변경
     def modifyRestaurantByName(self, name, newName):
-        for restaurant in self.restaurantList.restaurantList:
-            if (restaurant.getName() == name):
-                restaurant.setName(newName)
-                break
+        return self._restaurantList.modifyRestaurantByName(name,newName)
 
+    #식당 주소 변경
     def modifyRestaurantByLocation(self,name,location):
-        for restaurant in self.restaurantList.restaurantList:
-            if(restaurant.getName() == name):
-                restaurant.setLocation(location)
-                break
+        return self._restaurantList.modifyRestaurantByLocation(name,location)
 
+    #식당 음식들 변경
     def modifyRestaurantByFoods(self, name, foods):
-        for restaurant in self.restaurantList.restaurantList:
-            if (restaurant.getName() == name):
-                restaurant.setFoods(foods)
-                break
+        return self._restaurantList.modifyRestaurantByFoods(name,foods)
 
-    def deleteRestaurantByName(self,name):
-        for restaurant in self.restaurantList.restaurantList:
-            if (restaurant.getName() == name):
-                self.restaurantList.restaurantList.remove(restaurant)
-                break
+    # 식당 이름으로 식당객체 삭제
+    def deleteRestaurantByName(self, name):
+        return self._restaurantList.deleteRestaurantByName(name)
 
+    # 식당 이름과 주소로 식당객체 삭제
+    def deleteRestaurantByNameAndLocation(self, name,location):
+        return self._restaurantList.deleteRestaurantByNameAndLocation(name,location)
+
+    #식당 주소와 음식으로 식당객체 반환
+    def searchRestaurantByLocationAndFood(self,location,food):
+        restaurantList = self._restaurantList.searchRestaurantByLocation(location)
+        tmpList = []
+        for res in restaurantList:
+            for foodTmp in res.foods:
+                if foodTmp.name == food.name:
+                    tmpList.append(res)
+                    break
+        return tmpList
+
+    #식당 이름으로 리스트에서 식당객체 반환
+    def searchRestaurantByName(self,name):
+        return self._restaurantList.searchRestaurantByName(name)
 
     @property
     def restaurantList(self):

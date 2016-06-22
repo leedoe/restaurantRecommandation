@@ -1,12 +1,12 @@
 # -*- encoding=utf-8 -*-
 
-from Controller.UserManager import UserManager
 from Controller.FoodManager import FoodManager
 from Controller.FoodPreferenceManager import FoodPreferenceManager
 from Controller.RestaurantManager import RestaurantManager
-from Controller.RecommendationQueue import RecommendationQueue
+from Controller.UserManager import UserManager
+from Model.RecommendationQueue import RecommendationQueue
 from Model.Singleton import Singleton
-from Model.FoodPreference import FoodPreference
+
 
 # 파이썬은 getter/setter대신 properties를 사용한다고 함.
 # 해당 방법에 대해서 알아봐야 함.
