@@ -29,7 +29,7 @@ class RecommendationEngine(metaclass=Singleton):
     def runMapping(self, user):
         '''
         음식 선호와 식당의 교집합을 mapping해주는 메소드
-        :param user: User 클래스의 instance
+        :param user: User (User Class instance)
         :return: 교집합의 리스트
         '''
 
@@ -44,12 +44,12 @@ class RecommendationEngine(metaclass=Singleton):
         '''
         음식 추천 queue를 생성하는 메소드
         :param user: 음식 추천 queue를 생성할 User(User Class instance)
-        :return: RecommendationQueue 클래스의 instance
+        :return: 음식 추천 큐 (RecommendationQueue Class instance)
         '''
 
         # userPreferences = FoodPreference instance list
         userPreferences = sorted(self._foodPreferenceManager.getFoodPreferencesByUserID(user.ID),\
-                                 key=lambda preference : preference.score, reverse=True)
+                                 key=lambda preference: preference.score, reverse=True)
         foodSet = set()
         foodDict = dict()
 
