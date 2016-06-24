@@ -1,26 +1,36 @@
 #-*- encoding=utf-8 -*-
 
-from Model.FoodPreference  import FoodPreference
 
-#유저에 대한 정보를 담고 있는 클래스
 class User:
-    # 멤버변수:유저 이메일,비밀번호,나이,성별,음식 선호도
+
     def __init__(self, ID, email, password, age):
-        self._ID = ID
-        self._email = email
-        self._password = password
-        self._age = age
+        '''
+        사용자 정보를 가지고 있는 클래스
+        :param ID: 사용자 ID (integer)
+        :param email: 사용자 email (string)
+        :param password: 사용자 password (string)
+        :param age: 사용자 나이 (integer)
+        '''
+        self.ID = ID
+        self.email = email
+        self.password = password
+        self.age = age
 
-
-    #유저객체 정보를 출력
     def __repr__(self):
-        return "User{사용자ID=%d, 이메일=%s ,비밀번호=%s ,나이=%d"%(self._ID, self._email, self._password, self._age)
+        return "User(ID = %d, email = %s, password = %s, age = %d)"%(self._ID, self._email, self._password, self._age)
 
 
     @property
     def ID(self):
         return self._ID
 
+    @ID.setter
+    def ID(self, ID):
+        self._ID = ID
+
+    @ID.deleter
+    def ID(self):
+        del self._ID
 
     @property
     def email(self):
@@ -34,19 +44,17 @@ class User:
     def email(self):
         del self._email
 
-
     @property
     def password(self):
         return self._password
 
     @password.setter
-    def password(self, value):
-        self._password = value
+    def password(self, password):
+        self._password = password
 
     @password.deleter
     def password(self):
         del self._password
-
 
     @property
     def age(self):

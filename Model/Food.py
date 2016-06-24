@@ -1,32 +1,31 @@
 #-*- encoding=utf-8 -*-
 
 
-#음식에 대한 정보를 담고 있는 클래스
 class Food:
-    # 멤버변수:음식 id,음식 이름,속성 집합 맵
-    def __init__(self, foodID, name):
-        self._foodID = foodID
-        self._name = name
 
-    #속성이름을 키로 속성집합을 값으로 딕셔너리에 저장(음식이름(키),음식속성 집합(값))
-    def addAttribute(self,attributeName,attributeSet):
-        self._attributeSetDict[attributeName] = attributeSet
+    def __init__(self, ID, name):
+        '''
+        음식에 관한 정보를 가지고 있는 클래스
+        :param ID: 음식 ID (integer)
+        :param name: 음식 이름 (string)
+        '''
+        self.ID = ID
+        self.name = name
 
-    # 음식객체 정보를 출력
     def __repr__(self):
-        return "Food{음식ID=%d ,음식명=%s }"%(self._foodID,self._name)
+        return "Food(ID = %d, name = %s)"%(self.ID, self.name)
 
     @property
-    def foodID(self):
-        return self._foodID
+    def ID(self):
+        return self._ID
 
-    @foodID.setter
-    def foodID(self, value):
-        self._foodID = value
+    @ID.setter
+    def ID(self, ID):
+        self._ID = ID
 
-    @foodID.deleter
-    def foodID(self):
-        del self._foodID
+    @ID.deleter
+    def ID(self):
+        del self._ID
 
     @property
     def name(self):

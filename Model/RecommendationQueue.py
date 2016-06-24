@@ -3,6 +3,8 @@
 import copy
 from Controller.FoodPreferenceManager import FoodPreferenceManager
 from Controller.FoodManager import FoodManager
+from Model.RecommendationInfo import RecommendationInfo
+from Model.GroupInfo import GroupInfo
 from math import exp
 
 class RecommendationQueue:
@@ -10,10 +12,8 @@ class RecommendationQueue:
     '''
     static 영역
     '''
-    MAX_OF_GROUP_INFO = 5 # tuple에 넣어서 보여줄 그룹의 정보 최대 개수
     TOP = 1 # queue의 TOP이며, 코드에서 명시적으로 나타내기 위한 상수
     WEIGHT = {'SCORE': 4.0, 'ATTR': 3.0, 'MEAN': 2.0} # 추천 점수에 필요한 각 가중치, SCORE = 사용자가 준 평점, ATTR = 속성, MEAN = 총 평가 점수 평균
-    GROUPINFO = {'ID': 0, 'MEAN': 1, 'COUNT': 2, 'GROUPS': 3, 'SCORE': 4} # 큐에 저장되어 있는 tuple에 접근하기 위한 각 인덱스
 
 
     def __init__(self, user, foodSet, foodDict):
@@ -33,19 +33,22 @@ class RecommendationQueue:
 
         # 추천 가능성이 있는 각 음식들을 queue에 넣는 작업을 시작함
         for foodID in foodSet:
-            totalScore = totalCount = 0 # 해당 음식의 총점과 카운트는 0으로
 
             # 각 음식에 대한 평균과 모든 그룹의 총합, 카운트를 구함
-            for groupInfo in foodDict[foodID]:
-                totalScore += groupInfo[1]
-                totalCount += groupInfo[2]
-                groupInfo[1] /= groupInfo[2]
+            for recommendationGroupInfo in foodDict[foodID].groupInfos:
+                foodDict[foodID].mean += recommendationGroupInfo.mean
+                foodDict[foodID].count += recommendationGroupInfo.count
+                recommendationGroupInfo.mean /= recommendationGroupInfo.count
 
-            foodDict[foodID] = sorted(foodDict[foodID], key=lambda groupInfo: groupInfo[1]) # 평균을 기준으로 내림차순으로 정렬
-            del(foodDict[foodID][RecommendationQueue.MAX_OF_GROUP_INFO:]) # 최대 보여줄 그룹의 정보만 남김
+            foodDict[foodID].mean /= foodDict[foodID].count # 총 평균을 구함
 
-            # 추천 정보는 tuple로 저장
-            recommendationInfo = copy.copy((int(foodID), totalScore / totalCount, totalCount, foodDict[foodID], [False, None]))
+            foodDict[foodID].sortGroupInfos(False) # 평균을 기준으로 내림차순으로 정렬
+            foodDict[foodID].rstripGroupInfos() # 최대 보여줄 그룹의 정보만 남김
+
+            # foodDict에 있던 정보를 복사하여 queue에 넣음
+            recommendationInfo = copy.copy(foodDict[foodID])
+            del foodDict[foodID]
+
             self._add(recommendationInfo) # 추천 정보를 queue에 삽입
 
 
@@ -92,16 +95,17 @@ class RecommendationQueue:
         :return: 음식 추천 점수
         '''
         WEIGHT = RecommendationQueue.WEIGHT
-        GROUPINFO = RecommendationQueue.GROUPINFO
 
-        if recommendationInfo[GROUPINFO['SCORE']][0]:
-            return recommendationInfo[GROUPINFO['SCORE']][1]
 
-        targetFoodAttribute = self._foodManager.getFoodAttributesByFoodID(recommendationInfo[GROUPINFO['ID']]) # dictionaires
+        # 이미 추천 점수를 계산했으면 그 점수를 그대로 반환
+        if recommendationInfo.score:
+            return recommendationInfo.score
+
+
+        targetFoodAttribute = self._foodManager.getFoodAttributesByFoodID(recommendationInfo.foodID) # dictionaires
         userFoodPreferenceAttributes = self._foodManager.getPreferencedFoodAttributesListByUserID(self._user.ID) # dictionaries의 list
         attributeNames = targetFoodAttribute.keys()
 
-        score = 0.0
 
         #1. 유저가 평가한 음식의 속성, target 음식의 속성의 교집합의 합을 구함
         sumOfAttributesIntersection = 0
@@ -112,8 +116,8 @@ class RecommendationQueue:
                     sumOfAttributesIntersection += len(userFoodPreferenceAttribute[attributeName] & targetFoodAttribute[attributeName])
 
         #2. 총 평가 점수와 그에 따른 패널티 적용
-        penalty = 2.0 / (1.0 + exp(-0.05 * recommendationInfo[GROUPINFO['COUNT']]))
-        targetFoodMean = recommendationInfo[GROUPINFO['MEAN']]
+        penalty = 2.0 / (1.0 + exp(-0.05 * recommendationInfo.count))
+        targetFoodMean = recommendationInfo.mean
 
 
         #3. 사용자의 해당 음식에 대한 평가 점수가 존재할 시, 그에 대한 가산, 감산 점수
@@ -122,12 +126,9 @@ class RecommendationQueue:
         userAdditionalScore = 0.0
 
         #4. 추천 점수 계산
-        score = WEIGHT['ATTR'] * sumOfAttributesIntersection + WEIGHT['MEAN'] * targetFoodMean * penalty + userAdditionalScore
+        recommendationInfo.score = WEIGHT['ATTR'] * sumOfAttributesIntersection + WEIGHT['MEAN'] * targetFoodMean * penalty + userAdditionalScore
 
-        recommendationInfo[GROUPINFO['SCORE']][0] = True
-        recommendationInfo[GROUPINFO['SCORE']][1] = score
-
-        return score
+        return recommendationInfo.score
 
 
 

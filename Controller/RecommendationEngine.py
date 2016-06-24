@@ -6,11 +6,8 @@ from Controller.RestaurantManager import RestaurantManager
 from Controller.UserManager import UserManager
 from Model.RecommendationQueue import RecommendationQueue
 from Model.Singleton import Singleton
+from Model.RecommendationInfo import RecommendationInfo
 
-
-# 파이썬은 getter/setter대신 properties를 사용한다고 함.
-# 해당 방법에 대해서 알아봐야 함.
-# 일단은 getter를 사용하지 않고 코드 작성
 
 class RecommendationEngine(metaclass=Singleton):
 
@@ -60,11 +57,11 @@ class RecommendationEngine(metaclass=Singleton):
         mean = total / len(userPreferences)
 
         # 사용자가 평가한 음식 중 평균이 넘는 음식에 대해서 타 사용자 선호 조사
-        for foodPreference in userPreferences:
-            if foodPreference.score < mean: break  # 평균보다 낮은 점수면 루프에서 나감
+        for userPreference in userPreferences:
+            if userPreference.score < mean: break  # 평균보다 낮은 점수면 루프에서 나감
             # otherUserIDs = User ID(integer) list
-            otherUserIDs = self._foodPreferenceManager.getUserIDsByFoodID(foodPreference.foodID)
-            self._countAndCalculateMean(otherUserIDs, foodPreference, foodSet, foodDict)
+            otherUserIDs = self._foodPreferenceManager.getUserIDsByFoodID(userPreference.foodID)
+            self._countAndCalculateMean(otherUserIDs, userPreference, foodSet, foodDict)
 
         # 여기서 priority queue화를 한다.
         recommenationQueue = RecommendationQueue(user, foodSet, foodDict)
@@ -78,7 +75,7 @@ class RecommendationEngine(metaclass=Singleton):
 
 
 
-    def _countAndCalculateMean(self, otherUserIDs, foodPreference, foodSet, foodDict):
+    def _countAndCalculateMean(self, otherUserIDs, userPreference, foodSet, foodDict):
         '''
         다른 유저들의 선호도를 모두 체크하여 각 음식 그룹 점수의 총합과 평가한 사용자의 카운트를 계산하는 메소드
         해당 메소드는 private 형태이며, 내부에서 쓰이는 데이터는 다음과 같다.
@@ -103,11 +100,11 @@ class RecommendationEngine(metaclass=Singleton):
                 foodSet.add(str(otherUserPreference.foodID)) # 음식 ID를 string으로 parsing하여 set에 추가
 
                 if not foodDict.get(str(otherUserPreference.foodID)): # 해당 음식이 dictionaries에 존재하지 않을 경우
-                    foodDict[str(otherUserPreference.foodID)] = [[foodPreference.foodID, otherUserPreference.score, 1]] # 새로운 원소를 하나 생성함
+                    foodDict[str(otherUserPreference.foodID)] = RecommendationInfo(otherUserPreference.foodID, userPreference.foodID, otherUserPreference.score, 1) # 새로운 원소를 하나 생성함
                 else: # 해당 음식이 dictionaries에 존재할 경우
                     # 다른 사용자가 아닌 현재 사용자(나)가 평가한 음식의 그룹이 존재하지 않으면
-                    if not foodDict[str(otherUserPreference.foodID)][-1][0] == foodPreference.foodID:
-                        foodDict[str(otherUserPreference.foodID)].append([foodPreference.foodID, otherUserPreference.score, 1]) # 새로운 그룹을 생성
+                    if not foodDict[str(otherUserPreference.foodID)].latestGroupInfo.ID == userPreference.foodID:
+                        foodDict[str(otherUserPreference.foodID)].addGroupInfo(userPreference.foodID, otherUserPreference.score, 1) # 새로운 그룹을 생성
                     else : # 음식의 그룹이 존재할 경우 총 점수와 카운트를 증가시킴
-                        foodDict[str(otherUserPreference.foodID)][-1][1] += otherUserPreference.score
-                        foodDict[str(otherUserPreference.foodID)][-1][2] += 1
+                        foodDict[str(otherUserPreference.foodID)].latestGroupInfo.addScore(otherUserPreference.score)
+                        foodDict[str(otherUserPreference.foodID)].latestGroupInfo.incrementCount()
