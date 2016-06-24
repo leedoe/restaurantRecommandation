@@ -8,7 +8,6 @@ from django.contrib.auth.models import AbstractUser
 # UserInformation
 class UserInfo(AbstractUser):
     age = models.IntegerField(null=True)
-    location = models.CharField(max_length=250)
 
     def __str__(self):
         return self.username

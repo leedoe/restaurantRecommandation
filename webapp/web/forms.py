@@ -1,5 +1,9 @@
 from django import forms
+
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+
+from webapp.web.models import UserInfo
 
 
 class LoginForm(AuthenticationForm):
@@ -18,3 +22,20 @@ class LoginForm(AuthenticationForm):
             }
         )
     )
+
+
+class UserCreateForm(UserCreationForm):
+    age = forms.NumberInput(required=True)
+
+    class Meta:
+        model = UserInfo
+        fields = ("username", "password1", "password2", "age")
+
+    def save(self, commit=True):
+        user = self.save(commit=False)
+        user.age = self.age
+
+        if commit:
+            user.save()
+
+        return user

@@ -12,5 +12,7 @@ urlpatterns = [
         'django.contrib.auth.views.login',
         name='login',
         kwargs={'template_name': 'webTemplates/loginPage.html', 'authentication_form': LoginForm}),
+    url(r'^registration/$',views.UserRegister, name="signup"),
+    url(r'^perfer/$', template_name='webTemplates/perfer.html', name='perfer'),
 ]
 
