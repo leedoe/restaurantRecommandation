@@ -23,21 +23,47 @@ class RecommendationEngine(metaclass=Singleton):
 
 
 
-    def runMapping(self, user):
+    def runMapping(self, recommendationQueue, location):
         '''
         음식 선호와 식당의 교집합을 mapping해주는 메소드
-        :param user: User (User Class instance)
-        :return: 교집합의 리스트
+        :param recommendationQueue: 음식 추천 큐 (RecommendationQueue Class instance)
+        :param location: 추천 받을 지역 (string)
+        :return: tuple(식당 정보, 식당 특징) (list)
         '''
 
-        foodRecommendationQueue = self._getFoodRecommendationQueue(user)
+        result = []
 
-        return foodRecommendationQueue # 테스트를 하기 위한 임시 반환
+        #0. 음식 추천 큐가 비어있으면 None을 반환함
+        if recommendationQueue.isEmpty(): return None # 음식 추천 큐가 비어있음
+
+        #1. 추천된 음식 정보 하나를 pop
+        recommendedFood = recommendationQueue.pop()
+
+        #2. 추천된 음식 정보에서 foodID를 이용하여 restaurantID 목록을 얻음
+        restaurantIDs = self._restaurantManager.getRestaurantIDsByFoodID(recommendedFood.foodID)
+
+        #3. restaurantID와 location(위치) 를 이용하여 restaurant들의 정보 얻음
+        for restaurantID in restaurantIDs:
+            restaurants = self._restaurantManager.getRestaurantsByRestaurantIDAndLocation(restaurantID, location)
+            #restaurants = self._restaurantManager.getRestaurantsByRestaurantID(restaurantID)
+            for restaurant in restaurants:
+                result.append((restaurant, []))
+
+        #4. 결과로 나올 식당의 restaurantID를 이용하여 해당 식당의 특징을 얻음
+        for restaurantInfo in result:
+            restaurantInfo[1].extend(self._restaurantManager.getRestaurantFeaturesByRestaurantID(restaurantInfo[0].ID))
+
+        #5. 결과를 반환
+        return result
 
 
 
 
-    def _getFoodRecommendationQueue(self, user):
+
+
+
+
+    def getFoodRecommendationQueue(self, user):
         '''
         음식 추천 queue를 생성하는 메소드
         :param user: 음식 추천 queue를 생성할 User(User Class instance)

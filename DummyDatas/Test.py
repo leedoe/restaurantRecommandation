@@ -4,9 +4,6 @@ from Controller.RecommendationEngine import RecommendationEngine
 from Model.User import User
 
 user = User(1, 'aa@aa.com', '1234', 10)
-recommendedFood = RecommendationEngine().runMapping(user)
+recommendedFood = RecommendationEngine().getFoodRecommendationQueue(user)
 
-print(recommendedFood)
-print(recommendedFood.pop())
-print(recommendedFood.pop())
-print(recommendedFood.pop())
+print(RecommendationEngine().runMapping(recommendedFood, '홍대'))

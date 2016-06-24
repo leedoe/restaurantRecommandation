@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96c5a4da-a427-450a-8d94-5390df7a560b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Model/GroupInfo.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Controller/DBAcountManager.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DBInfo" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/FoodDBManager.py" afterPath="$PROJECT_DIR$/Controller/FoodDBManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/FoodManager.py" afterPath="$PROJECT_DIR$/Controller/FoodManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py" afterPath="$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/RecommendationEngine.py" afterPath="$PROJECT_DIR$/Controller/RecommendationEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/Food.py" afterPath="$PROJECT_DIR$/Model/Food.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/FoodAttribute.py" afterPath="$PROJECT_DIR$/Model/FoodAttribute.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/FoodPreference.py" afterPath="$PROJECT_DIR$/Model/FoodPreference.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/RecommendationInfo.py" afterPath="$PROJECT_DIR$/Model/RecommendationInfo.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/RestaurantDBManager.py" afterPath="$PROJECT_DIR$/Controller/RestaurantDBManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/RestaurantManager.py" afterPath="$PROJECT_DIR$/Controller/RestaurantManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/UserDBManager.py" afterPath="$PROJECT_DIR$/Controller/UserDBManager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DummyDatas/Test.py" afterPath="$PROJECT_DIR$/DummyDatas/Test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/RecommendationQueue.py" afterPath="$PROJECT_DIR$/Model/RecommendationQueue.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/Restaurant.py" afterPath="$PROJECT_DIR$/Model/Restaurant.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/RestaurantFeature.py" afterPath="$PROJECT_DIR$/Model/RestaurantFeature.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/User.py" afterPath="$PROJECT_DIR$/Model/User.py" />
     </list>
     <ignored path="reco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +29,8 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/restaurantRecommendation$Test.coverage" NAME="Test Coverage Results" MODIFIED="1466746674996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DummyDatas" />
+    <SUITE FILE_PATH="coverage/restaurantRecommendation$Test.coverage" NAME="Test Coverage Results" MODIFIED="1466766406123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DummyDatas" />
+    <SUITE FILE_PATH="coverage/restaurantRecommendation$DBAcountManager.coverage" NAME="DBAcountManager Coverage Results" MODIFIED="1466758725601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Controller" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -40,8 +44,8 @@
       <file leaf-file-name="RecommendationQueue.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/RecommendationQueue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
+            <state relative-caret-position="656">
+              <caret line="170" column="30" selection-start-line="170" selection-start-column="30" selection-end-line="170" selection-end-column="30" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
@@ -49,81 +53,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestaurantDBManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/RestaurantDBManager.py">
+      <file leaf-file-name="cursors.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/cursors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="193">
+              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecommendationEngine.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Controller/RecommendationEngine.py">
+      <file leaf-file-name="connections.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/connections.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+            <state relative-caret-position="418">
+              <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestaurantManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/RestaurantManager.py">
+      <file leaf-file-name="err.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/err.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="3" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroupInfo.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/GroupInfo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/User.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecommendationInfo.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/RecommendationInfo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="43" column="46" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodPreferenceDBManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodDBManager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/FoodDBManager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+            <state relative-caret-position="280">
+              <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,11 +86,75 @@
       <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DummyDatas/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="200">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
                 <element signature="e#26#90#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecommendationEngine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controller/RecommendationEngine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="47" column="79" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="79" />
+              <folding>
+                <element signature="e#26#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestaurantManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controller/RestaurantManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="26" column="72" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="72" />
+              <folding>
+                <element signature="e#26#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBInfo" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DBInfo">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestaurantDBManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controller/RestaurantDBManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="61" column="63" selection-start-line="61" selection-start-column="63" selection-end-line="61" selection-end-column="63" />
+              <folding>
+                <element signature="e#26#40#0" expanded="true" />
+                <marker date="1466766405639" expanded="true" signature="884:927" placeholder="SELECT Resta... Menu" />
+                <marker date="1466766405639" expanded="true" signature="1319:1353" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="1848:1882" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="1848:1921" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="1848:1934" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="1848:1939" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="1848:1941" placeholder="SELECT * FRO... Restaurant" />
+                <marker date="1466766405639" expanded="true" signature="2368:2419" placeholder="SELECT * FRO... RestaurantFeature" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FoodPreferenceDBManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,25 +179,29 @@
         <option value="$PROJECT_DIR$/webapp/web/models.py" />
         <option value="$PROJECT_DIR$/webapp/webapp/settings.py" />
         <option value="$PROJECT_DIR$/Controller/FoodPreferenceManager.py" />
-        <option value="$PROJECT_DIR$/Controller/RestaurantDBManager.py" />
-        <option value="$PROJECT_DIR$/Controller/UserDBManager.py" />
         <option value="$PROJECT_DIR$/Controller/UserManager.py" />
         <option value="$PROJECT_DIR$/Model/Attribute.py" />
-        <option value="$PROJECT_DIR$/Controller/FoodManager.py" />
-        <option value="$PROJECT_DIR$/Controller/RestaurantManager.py" />
         <option value="$PROJECT_DIR$/Model/FoodFeature.py" />
         <option value="$PROJECT_DIR$/Model/FoodRecommendationInfo.py" />
-        <option value="$PROJECT_DIR$/DummyDatas/Test.py" />
         <option value="$PROJECT_DIR$/Model/Food.py" />
         <option value="$PROJECT_DIR$/Model/FoodAttribute.py" />
         <option value="$PROJECT_DIR$/Model/FoodPreference.py" />
-        <option value="$PROJECT_DIR$/Model/Restaurant.py" />
-        <option value="$PROJECT_DIR$/Model/RestaurantFeature.py" />
         <option value="$PROJECT_DIR$/Model/User.py" />
-        <option value="$PROJECT_DIR$/Model/RecommendationQueue.py" />
         <option value="$PROJECT_DIR$/Model/GroupInfo.py" />
         <option value="$PROJECT_DIR$/Model/RecommendationInfo.py" />
+        <option value="$PROJECT_DIR$/Controller/UserDBManager.py" />
+        <option value="$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py" />
+        <option value="$PROJECT_DIR$/Controller/FoodManager.py" />
+        <option value="$PROJECT_DIR$/Controller/DBAcountManager.py" />
+        <option value="$PROJECT_DIR$/Controller/FoodDBManager.py" />
+        <option value="$PROJECT_DIR$/Model/Restaurant.py" />
+        <option value="$PROJECT_DIR$/Model/RestaurantFeature.py" />
+        <option value="$PROJECT_DIR$/DummyDatas/Test.py" />
+        <option value="$PROJECT_DIR$/Model/RecommendationQueue.py" />
         <option value="$PROJECT_DIR$/Controller/RecommendationEngine.py" />
+        <option value="$PROJECT_DIR$/Controller/RestaurantManager.py" />
+        <option value="$PROJECT_DIR$/Controller/RestaurantDBManager.py" />
+        <option value="$PROJECT_DIR$/DBInfo" />
       </list>
     </option>
   </component>
@@ -306,6 +328,24 @@
       <module name="RestaurantRecommendation" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DummyDatas/Test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DBAcountManager" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Controller" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RestaurantRecommendation" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Controller/DBAcountManager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -518,12 +558,14 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.Test" />
+      <item index="1" class="java.lang.String" itemvalue="Python.DBAcountManager" />
     </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Python.Test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DBAcountManager" />
       </list>
     </recent_temporary>
   </component>
@@ -548,24 +590,31 @@
       <option name="project" value="LOCAL" />
       <updated>1466666286467</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="코드를 객체 지향으로 완전히 변경.&#10;&#10;기존에 RecommendationQueue에서&#10;tuple을 반환하던 것과 다르게&#10;RecommendationInfo라는 instance를 반환하여&#10;조금 더 편하게 이해 가능.">
+      <created>1466748559291</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1466748559291</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50437635" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3884026" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -588,7 +637,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="필요 모델에 대해 적용하기 전.&#10;&#10;Model&#10;Food Class&#10;FoodAttribute Class&#10;FoodPreference Class&#10;Restaurant Class&#10;RestaurantFeature Class&#10;RecommendationInfo Class&#10;&#10;RecommendationInfo는 RecommendationQueue의 원소로 바꿀 예정.&#10;나머지 클래스는 DB에서 불러온 정보 그대로 instance화 할 예정인 Class임.&#10;&#10;목적은 더욱 더 가독성을 좋게 하기 위함.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="필요 모델에 대해 적용하기 전.&#10;&#10;Model&#10;Food Class&#10;FoodAttribute Class&#10;FoodPreference Class&#10;Restaurant Class&#10;RestaurantFeature Class&#10;RecommendationInfo Class&#10;&#10;RecommendationInfo는 RecommendationQueue의 원소로 바꿀 예정.&#10;나머지 클래스는 DB에서 불러온 정보 그대로 instance화 할 예정인 Class임.&#10;&#10;목적은 더욱 더 가독성을 좋게 하기 위함.&#10;" />
+    <MESSAGE value="코드를 객체 지향으로 완전히 변경.&#10;&#10;기존에 RecommendationQueue에서&#10;tuple을 반환하던 것과 다르게&#10;RecommendationInfo라는 instance를 반환하여&#10;조금 더 편하게 이해 가능." />
+    <option name="LAST_COMMIT_MESSAGE" value="코드를 객체 지향으로 완전히 변경.&#10;&#10;기존에 RecommendationQueue에서&#10;tuple을 반환하던 것과 다르게&#10;RecommendationInfo라는 instance를 반환하여&#10;조금 더 편하게 이해 가능." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -599,78 +649,24 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="foodSet" language="Python" />
-        <watch expression="foodDict" language="Python" />
-        <watch expression="totalScore" language="Python" />
-        <watch expression="totalCount" language="Python" />
-        <watch expression="recommendationGroupInfo" language="Python" />
-        <watch expression="foodDict[foodID]" language="Python" />
-        <watch expression="recommendationInfo" language="Python" />
+        <watch expression="recommendationQueue" language="Python" />
+        <watch expression="result" language="Python" />
+        <watch expression="restaurant" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DummyDatas/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding>
-            <element signature="e#26#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/FoodAttribute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/FoodPreference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/RecommendationQueue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
-          <folding>
-            <element signature="e#26#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Restaurant.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/RestaurantFeature.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controller/RecommendationEngine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#26#72#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -819,20 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/UserDBManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controller/UserManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -842,13 +824,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/FoodList.py" />
     <entry file="file://$PROJECT_DIR$/Model/RestaurantList.py" />
-    <entry file="file://$PROJECT_DIR$/Controller/FoodManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-175">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2016.1/system/python_stubs/-1442825926/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -873,102 +848,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/FoodAttribute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1675">
-          <caret line="67" column="82" selection-start-line="67" selection-start-column="82" selection-end-line="67" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Singleton.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Restaurant.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/RestaurantFeature.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/User.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/RestaurantDBManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/RestaurantManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="3" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DummyDatas/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#26#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/RecommendationQueue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
-          <folding>
-            <element signature="e#26#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/RecommendationInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="43" column="46" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/FoodDBManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -981,10 +864,193 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/FoodManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+          <folding>
+            <element signature="e#26#63#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/FoodDBManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+          <folding>
+            <element signature="e#26#40#0" expanded="true" />
+            <marker date="1466759704305" expanded="true" signature="1012:1075" placeholder="SELECT * FRO... FoodAttribute" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/DBAcountManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/RecommendationInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Singleton.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/FoodAttribute.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="23" column="133" selection-start-line="19" selection-start-column="8" selection-end-line="23" selection-end-column="133" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Restaurant.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/RestaurantFeature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/UserDBManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/FoodPreferenceDBManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/RecommendationQueue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="170" column="30" selection-start-line="170" selection-start-column="30" selection-end-line="170" selection-end-column="30" />
+          <folding>
+            <element signature="e#26#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/err.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DummyDatas/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/cursors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python34/site-packages/pymysql/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Controller/RecommendationEngine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        <state relative-caret-position="290">
+          <caret line="47" column="79" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="79" />
+          <folding>
+            <element signature="e#26#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/RestaurantManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="26" column="72" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="72" />
+          <folding>
+            <element signature="e#26#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/RestaurantDBManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="61" column="63" selection-start-line="61" selection-start-column="63" selection-end-line="61" selection-end-column="63" />
+          <folding>
+            <element signature="e#26#40#0" expanded="true" />
+            <marker date="1466766405639" expanded="true" signature="884:927" placeholder="SELECT Resta... Menu" />
+            <marker date="1466766405639" expanded="true" signature="1319:1353" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="1848:1882" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="1848:1921" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="1848:1934" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="1848:1939" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="1848:1941" placeholder="SELECT * FRO... Restaurant" />
+            <marker date="1466766405639" expanded="true" signature="2368:2419" placeholder="SELECT * FRO... RestaurantFeature" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBInfo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -14,7 +14,7 @@ class Restaurant:
         self.name = name
         self.location = location
 
-    #식당객체 정보를 출력
+
     def __repr__(self):
         return "Restaurant(ID = %d, name = %s, location = %s)"%(self.ID, self.name, self.location)
 

@@ -15,6 +15,14 @@ class RestaurantFeature:
         self.name = name
         self.contents = contents
 
+    def __repr__(self):
+        contents = ''
+        for content in self.contents:
+            contents += content + ', '
+        contents = contents[:-2]
+        return "FoodAttribute(ID = %d, RestaurantID = %d, FeatureName = %s, contents = %s)" \
+               % (self.ID, self.restaurantID, self.name, contents)
+
 
     @property
     def ID(self):

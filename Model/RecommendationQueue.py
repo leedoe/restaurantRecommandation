@@ -163,10 +163,12 @@ class RecommendationQueue:
         return result
 
 
-
-
-
-
-
-
-
+    def isEmpty(self):
+        '''
+        음식 추천 큐가 비었는지 확인해줌
+        :return: True = empty, False = not empty (boolean)
+        '''
+        if len(self._queue) <= 1:
+            return True
+        else:
+            return False

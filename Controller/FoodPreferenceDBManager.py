@@ -1,5 +1,6 @@
 # -*- encoding=utf-8 -*-
 
+import pymysql
 from Model.Singleton import Singleton
 from Model.FoodPreference import FoodPreference
 
