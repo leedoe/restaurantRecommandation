@@ -4,7 +4,6 @@ from Model.Singleton import Singleton
 from Controller.FoodPreferenceDBManager import FoodPreferenceDBManager
 
 
-#음식선호도 객체를 관리하는 매니저 클래스
 class FoodPreferenceManager(metaclass=Singleton):
 
     def __init__(self):
@@ -22,6 +21,15 @@ class FoodPreferenceManager(metaclass=Singleton):
         '''
         해당 사용자의 음식 선호를 반환
         :param userID: 사용자 ID (integer)
-        :return: FoodPreference instances (list)
+        :return: FoodPreference Class instances (list)
         '''
         return self._foodPreferenceDBManger.searchFoodPreferencesByUserID(userID)
+
+    def getFoodPreferenceByUserIDAndFoodID(self, userID, foodID):
+        '''
+        해당 사용자가 평가했던 음식의 음식 선호를 반환
+        :param userID: 사용자 ID (integer)
+        :param foodID: 음식 ID (integer)
+        :return: FoodPreference Class (instance)
+        '''
+        return self._foodPreferenceDBManger.searchFoodPreferenceByUserIDAndFoodID(userID, foodID)

@@ -4,10 +4,9 @@ from Model.Singleton import Singleton
 from Model.Food import Food
 from Controller.FoodDBManager import FoodDBManager
 
-#음식 객체를 관리하는 매니저 클래스
+
 class FoodManager(metaclass=Singleton):
 
-    # 멤버변수:음식 객체 리스트,음식db매니저
     def __init__(self):
         self._foodDBManager = FoodDBManager()
 
@@ -28,3 +27,11 @@ class FoodManager(metaclass=Singleton):
         :return: 해당 사용자의 선호 음식의 속성 dictionary (list)
         '''
         return self._foodDBManager.searchPreferencedFoodAttributesListByUserID(userID)
+
+
+    def getFoodAttributeWeights(self):
+        '''
+        각 음식 속성에 대한 가중치를 반환
+        :return: 음식 속성 가중치 (dictionary)
+        '''
+        return self._foodDBManager.searchFoodAttributeWeights()

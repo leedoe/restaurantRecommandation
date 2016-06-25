@@ -7,7 +7,7 @@ from Controller.UserManager import UserManager
 from Model.RecommendationQueue import RecommendationQueue
 from Model.Singleton import Singleton
 from Model.RecommendationInfo import RecommendationInfo
-
+from math import sqrt
 
 class RecommendationEngine(metaclass=Singleton):
 
@@ -38,6 +38,9 @@ class RecommendationEngine(metaclass=Singleton):
 
         #1. 추천된 음식 정보 하나를 pop
         recommendedFood = recommendationQueue.pop()
+
+        print('추천 음식 정보 및 추천 점수에 관한 사항')
+        print(recommendedFood)
 
         #2. 추천된 음식 정보에서 foodID를 이용하여 restaurantID 목록을 얻음
         restaurantIDs = self._restaurantManager.getRestaurantIDsByFoodID(recommendedFood.foodID)
@@ -80,11 +83,19 @@ class RecommendationEngine(metaclass=Singleton):
         total = 0
         for preference in userPreferences:
             total = preference.score
-        mean = total / len(userPreferences)
+
+        user.mean = total / len(userPreferences) # 사용자의 평균
+
+
+        dist = 0.0
+        for preference in userPreferences:
+            dist += (preference.score - user.mean) ** 2
+        user.std = sqrt(dist / len(userPreferences)) # 사용자의 표준 편차
+
 
         # 사용자가 평가한 음식 중 평균이 넘는 음식에 대해서 타 사용자 선호 조사
         for userPreference in userPreferences:
-            if userPreference.score < mean: break  # 평균보다 낮은 점수면 루프에서 나감
+            if userPreference.score < user.mean: break  # 평균보다 낮은 점수면 루프에서 나감
             # otherUserIDs = User ID(integer) list
             otherUserIDs = self._foodPreferenceManager.getUserIDsByFoodID(userPreference.foodID)
             self._countAndCalculateMean(otherUserIDs, userPreference, foodSet, foodDict)
@@ -108,10 +119,10 @@ class RecommendationEngine(metaclass=Singleton):
         foodSet : 추천 가능성이 있는 음식 ID(string(integer->string으로 parsing))의 Set
         foodDict : 추천 가능성이 있는 음식에 대해서 각 음식을 평가한 그룹이 평가한 점수의 총합과 카운트를 저장하는 Dictionaries
         foodDict.Key = '음식ID'(string(integer->string 으로 parsing함, dictionaries의 key가 되기 위함))
-        foodDict.value = [[음식ID(integer), 점수 총합, 평가한 총인원], [음식ID(integer), 점수 총합, 평가한 총인원], ...]
+        foodDict.value = RecommendationInfo Class instance
         (점수 총합을 저장하는 이유는 평균을 지속적으로 유지하기 위해서는 추가할 때 마다 연산을 해야 하기 때문이다.)
         :param otherUserIDs: 해당 음식을 평가한 다른 유저 ID(userID(integer)를 원소로 갖는 list)
-        :param foodPreference: 추천을 요구하는 사용자의 해당 음식 취향
+        :param userPreference: 추천을 요구하는 사용자의 해당 음식 취향
         :param foodSet: 추천 가능성이 있는 음식 이름의 set
         :param foodDict: 추천 가능성이 있는 음식의 각 group별 점수 총합, 평가 총인원 dictionaries
         :return: None
