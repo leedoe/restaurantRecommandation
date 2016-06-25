@@ -67,6 +67,11 @@ class RecommendationQueue:
         self._queue.append(recommendationInfo) # queue에 추천 정보를 삽입
         cursor = len(self._queue) - 1 # 현재 음식 추천 정보를 가르키는 cursor
 
+        # 큐에 추천 음식이 하나만 있을 때 추천 점수를 계산함
+        if cursor == 1:
+            self._getRecommendationScore(self._queue[cursor])
+            return
+
         while (cursor / 2) >= RecommendationQueue.TOP :
             if self._getRecommendationScore(self._queue[cursor]) > self._getRecommendationScore(self._queue[(cursor/2).__int__()]):
                 self._swap(cursor, (cursor/2).__int__())

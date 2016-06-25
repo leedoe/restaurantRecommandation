@@ -34,7 +34,7 @@ class RecommendationEngine(metaclass=Singleton):
         result = []
 
         #0. 음식 추천 큐가 비어있으면 None을 반환함
-        if recommendationQueue.isEmpty(): return None # 음식 추천 큐가 비어있음
+        if recommendationQueue is None or recommendationQueue.isEmpty(): return None # 음식 추천 큐가 비어있음
 
         #1. 추천된 음식 정보 하나를 pop
         recommendedFood = recommendationQueue.pop()
@@ -70,12 +70,16 @@ class RecommendationEngine(metaclass=Singleton):
         '''
         음식 추천 queue를 생성하는 메소드
         :param user: 음식 추천 queue를 생성할 User(User Class instance)
-        :return: 음식 추천 큐 (RecommendationQueue Class instance)
+        :return: 음식 추천 큐 (RecommendationQueue Class instance), 음식을 전혀 평가하지 않으면 (None)
         '''
 
         # userPreferences = FoodPreference instance list
         userPreferences = sorted(self._foodPreferenceManager.getFoodPreferencesByUserID(user.ID),\
                                  key=lambda preference: preference.score, reverse=True)
+
+        if not len(userPreferences):
+            return None # 사용자가 추천을 전혀 하지 않았을 경우
+
         foodSet = set()
         foodDict = dict()
 
@@ -84,7 +88,7 @@ class RecommendationEngine(metaclass=Singleton):
         for preference in userPreferences:
             total = preference.score
 
-        user.mean = total / len(userPreferences) # 사용자의 평균
+        user.mean = 1.0 * total / len(userPreferences) # 사용자의 평균
 
 
         dist = 0.0
