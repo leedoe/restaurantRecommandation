@@ -15,6 +15,8 @@ class User:
         self.email = email
         self.password = password
         self.age = age
+        self.mean = float()
+        self.std = float()
 
     def __repr__(self):
         return "User(ID = %d, email = %s, password = %s, age = %d)"%(self._ID, self._email, self._password, self._age)
@@ -67,3 +69,27 @@ class User:
     @age.deleter
     def age(self):
         del self._age
+
+    @property
+    def mean(self):
+        return self._mean
+
+    @mean.setter
+    def mean(self, mean):
+        self._mean = mean
+
+    @mean.deleter
+    def mean(self):
+        del self._mean
+
+    @property
+    def std(self):
+        return self._std
+
+    @std.setter
+    def std(self, std):
+        self._std = std
+
+    @std.deleter
+    def std(self):
+        del self._std

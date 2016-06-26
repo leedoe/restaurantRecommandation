@@ -34,7 +34,6 @@ class FoodDBManager(metaclass=Singleton):
 
         return result
 
-
     def searchPreferencedFoodAttributesListByUserID(self, userID):
         '''
         해당 사용자의 모든 선호 음식에 대한 속성을 반환
@@ -47,5 +46,21 @@ class FoodDBManager(metaclass=Singleton):
 
         for foodID in foodIDs:
             result.append(self.searchFoodAttributesByFoodID(foodID))
+
+        return result
+
+    def searchFoodAttributeWeights(self):
+        '''
+        모든 음식의 속성에 대한 가중치를 반환
+        :return: 음식 속성 가중치 (dictionary)
+        '''
+
+        result = dict()
+
+        records = self._conn.cursor()
+        records.execute('SELECT * FROM FoodAttributeWeight')
+
+        for record in records:
+            result[record[0]] = float(record[1])
 
         return result
