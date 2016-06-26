@@ -68,7 +68,7 @@ class RecommendationEngine(metaclass=Singleton):
             groupFoodNames.append(groupFoodName)
 
         #7. 실제 사용할 데이터들을 tuple화 함
-        result = (dict(), list()) # 앞은 추천 음식 정보, 뒤는 식당 정보
+        result = (dict(), list())  # 앞은 추천 음식 정보, 뒤는 식당 정보
         result[0]['foodName'] = recommendedFoodName
         result[0]['recommendationScore'] = recommendedFood.score
         result[0]['mean'] = mean
@@ -84,7 +84,7 @@ class RecommendationEngine(metaclass=Singleton):
             features = dict()
             for feature in restaurantInfo[1]:
                 features[feature.name] = feature.contents
-            result[1].append((restaurantInfo[0].name, features))
+                result[1].append((restaurantInfo[0].name, features))
 
 
         return result
@@ -136,6 +136,7 @@ class RecommendationEngine(metaclass=Singleton):
 
         # 여기서 priority queue화를 한다.
         recommenationQueue = RecommendationQueue(user, foodSet, foodDict)
+        recommenationQueue.finishAddingItem()
 
         #메모리에서 해당 data들을 명시적으로 없애줌.
         del(foodSet)

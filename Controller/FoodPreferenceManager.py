@@ -50,3 +50,11 @@ class FoodPreferenceManager(metaclass=Singleton):
         :return: FoodPreference Class (instance)
         '''
         return self._foodPreferenceDBManger.searchFoodPreferenceByUserIDAndFoodID(userID, foodID)
+
+    def getFoodPreferenceScoresByUserID(self, userID):
+        '''
+        해당 사용자가 평가한 음식들의 점수를 반환
+        :param userID: 사용자 ID (integer)
+        :return: tuple(음식 ID, score) (dictionary)
+        '''
+        return self._foodPreferenceDBManger.searchFoodPreferenceScoresByUserID(userID)

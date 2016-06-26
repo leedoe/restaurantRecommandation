@@ -42,7 +42,7 @@ class FoodDBManager(metaclass=Singleton):
         '''
         해당 사용자의 모든 선호 음식에 대한 속성을 반환
         :param userID: 사용자 ID (integer)
-        :return: 음식 속성 dictionaries (list)
+        :return: tuple(음식 ID, 음식 속성 dictionary) (list)
         '''
 
         result = []
@@ -50,7 +50,8 @@ class FoodDBManager(metaclass=Singleton):
         foodIDs = self._foodPreferenceDBManager.searchFoodIDsByUserID(userID)
 
         for foodID in foodIDs:
-            result.append(self.searchFoodAttributesByFoodID(foodID))
+            item = (foodID, self.searchFoodAttributesByFoodID(foodID))
+            result.append(item)
 
         return result
 
