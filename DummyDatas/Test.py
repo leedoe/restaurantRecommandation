@@ -3,7 +3,7 @@
 from Controller.RecommendationEngine import RecommendationEngine
 from Model.User import User
 
-user = User(21, 'aa@aa.com', '1234', 10)
+user = User(22, 'aa@aa.com', '1234', 10)
 recommendedFood = RecommendationEngine().getFoodRecommendationQueue(user)
 
 print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
