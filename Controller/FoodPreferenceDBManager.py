@@ -112,3 +112,20 @@ class FoodPreferenceDBManager(metaclass=Singleton):
 
         records.close()
         return FoodPreference(record[0], record[1], record[3], record[2])
+
+    def searchFoodPreferenceScoresByUserID(self, userID):
+        '''
+        FoodPreference Table에 접근하여 사용자 ID를 이용하여 사용자가 평가한 점수를 반환
+        :param userID: 사용자 ID (integer)
+        :return: tuple(음식 ID, score) (dictionary)
+        '''
+
+        result = dict()
+
+        records = self._conn.cursor()
+        records.execute("SELECT score, foodID_id FROM web_userfoodpreference WHERE userID_id=" + str(userID))
+
+        for record in records:
+            result[record[1]] = int(record[0])
+
+        return result

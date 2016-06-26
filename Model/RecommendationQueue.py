@@ -14,7 +14,7 @@ class RecommendationQueue:
     static 영역
     '''
     TOP = 1 # queue의 TOP이며, 코드에서 명시적으로 나타내기 위한 상수
-    WEIGHT = {'SCORE': 4.0, 'ATTR': 3.0, 'MEAN': 6.0} # 추천 점수에 필요한 각 가중치, SCORE = 사용자가 준 평점, ATTR = 속성, MEAN = 총 평가 점수 평균
+    WEIGHT = {'SCORE': 5.0, 'ATTR': 3.0, 'MEAN': 10.0} # 추천 점수에 필요한 각 가중치, SCORE = 사용자가 준 평점, ATTR = 속성, MEAN = 총 평가 점수 평균
 
 
 
@@ -28,11 +28,14 @@ class RecommendationQueue:
         self._foodPreferenceManager = FoodPreferenceManager()
         self._foodManager = FoodManager()
         self._foodAttributeWeight = self._foodManager.getFoodAttributeWeights()
+        self._foodAttributeScore = dict()
 
         # 각 음식을 하나씩 꺼내서 Queue에 넣는 작업을 한다.
         # 해당 Queue의 top은 [1]이다.
         self._queue = [('UNDERFLOW')]
         self._user = user
+
+        self._foodAttributeScore = self._foodPreferenceManager.getFoodPreferenceScoresByUserID(self._user.ID)
 
         # 추천 가능성이 있는 각 음식들을 queue에 넣는 작업을 시작함
         for foodID in foodSet:
@@ -119,10 +122,12 @@ class RecommendationQueue:
         sumOfAttributesIntersection = 0
         for userFoodPreferenceAttribute in userFoodPreferenceAttributes:
             for attributeName in attributeNames:
+                z = (self._foodAttributeScore[userFoodPreferenceAttribute[0]] - self._user.mean) / self._user.std
+
                 # 사용자 선호 음식과 target 음식의 속성들의 교집합 개수에 해당 속성의 가중치를 곱한 값을 계산
-                if userFoodPreferenceAttribute.get(attributeName):
-                    sumOfAttributesIntersection += len(userFoodPreferenceAttribute[attributeName] & targetFoodAttribute[attributeName]) \
-                                                        * self._foodAttributeWeight[attributeName]
+                if userFoodPreferenceAttribute[1].get(attributeName):
+                    sumOfAttributesIntersection += len(userFoodPreferenceAttribute[1][attributeName] & targetFoodAttribute[attributeName]) \
+                                                        * self._foodAttributeWeight[attributeName] * z
 
         #2. 총 평가 점수와 그에 따른 패널티 적용
         penalty = 2.0 / (1.0 + exp(-0.05 * recommendationInfo.count))
@@ -188,3 +193,12 @@ class RecommendationQueue:
             return True
         else:
             return False
+
+
+    def finishAddingItem(self):
+        '''
+        Queue에 더이상 item을 넣지 않을 때 수행한다.
+        RecommendationQueue가 가지고 있던 사용자가 평가한 음식의 점수에 대해서 메모리 할당 해제를 한다.
+        :return: None
+        '''
+        del self._foodAttributeScore

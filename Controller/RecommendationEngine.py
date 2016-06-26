@@ -136,6 +136,7 @@ class RecommendationEngine(metaclass=Singleton):
 
         # 여기서 priority queue화를 한다.
         recommenationQueue = RecommendationQueue(user, foodSet, foodDict)
+        recommenationQueue.finishAddingItem()
 
         #메모리에서 해당 data들을 명시적으로 없애줌.
         del(foodSet)
