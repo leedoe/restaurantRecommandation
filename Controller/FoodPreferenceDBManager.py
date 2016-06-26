@@ -13,6 +13,9 @@ class FoodPreferenceDBManager(metaclass=Singleton):
                                      port=3306, user=dbAcountManager.ID, passwd=dbAcountManager.PW, \
                                      db='django', charset='utf8')
 
+    def __del__(self):
+        self._conn.close()
+
 
     def searchUserIDsByFoodID(self, foodID):
         '''
@@ -23,9 +26,25 @@ class FoodPreferenceDBManager(metaclass=Singleton):
 
         records = self._conn.cursor()
         records.execute("SELECT userID_id FROM web_userfoodpreference WHERE foodID_id=" + str(foodID))
-
         result = [int(record[0]) for record in records]
 
+        records.close()
+        return result
+
+    def searchUserIDsByFoodIDWithoutUserID(self, foodID, userID):
+        '''
+        FoodPreference Table에서 찾아서 입력받은 User ID를 제외한 나머지 사용자를 list로 반환
+        :param foodID: 음식 ID (integer)
+        :param userID: 사용자 ID (integer)
+        :return: User ID(integer) list
+        '''
+
+        records = self._conn.cursor()
+        records.execute("SELECT userID_id FROM web_userfoodpreference WHERE foodID_id=" + str(foodID)\
+                        + " AND userID_id!=" + str(userID))
+        result = [int(record[0]) for record in records]
+
+        records.close()
         return result
 
 
@@ -38,9 +57,9 @@ class FoodPreferenceDBManager(metaclass=Singleton):
 
         records = self._conn.cursor()
         records.execute("SELECT foodID_id FROM web_userfoodpreference WHERE userID_id=" + str(userID))
-
         result = [int(record[0]) for record in records]
 
+        records.close()
         return result
 
 
@@ -52,10 +71,23 @@ class FoodPreferenceDBManager(metaclass=Singleton):
         '''
 
         records = self._conn.cursor()
-        records.execute("SELECT id, score, foodID_id, userID_id FROM web_userfoodpreference WHERE userID_id=" + str(userID))
+        records.execute("SELECT * FROM web_userfoodpreference WHERE userID_id=" + str(userID))
+        result = [FoodPreference(int(record[0]), int(record[1]), int(record[3]), int(record[2])) for record in records]
+        records.close()
+        return result
 
-        result = [FoodPreference(int(record[0]), int(record[1]), int(record[2]), int(record[3])) for record in records]
+    def searchFoodScoresByFoodID(self, foodID):
+        '''
+        FoodPreference Table에서 찾아서 score들을 list로 반환
+        :param foodID: 음식 ID (integer)
+        :return: 음식 score (list)
+        '''
 
+        records = self._conn.cursor()
+        records.execute("SELECT score FROM web_userfoodpreference WHERE foodID_id=" + str(foodID))
+        result = [int(score[0]) for score in records]
+
+        records.close()
         return result
 
     def searchFoodPreferenceByUserIDAndFoodID(self, userID, foodID):
@@ -68,12 +100,15 @@ class FoodPreferenceDBManager(metaclass=Singleton):
 
         records = self._conn.cursor()
         records.execute("SELECT id, score, foodID_id, userID_id FROM web_userfoodpreference "\
-                        + "WHERE foodID_id=" + str(foodID) + " AND userID_id=" + str(userID))
+                            + "WHERE foodID_id=" + str(foodID) + " AND userID_id=" + str(userID))
 
-        if records.rowcount <= 0: return None
+        if records.rowcount <= 0:
+            records.close()
+            return None
 
         record = []
         for attrs in records:
             for attr in attrs: record.append(int(attr))
 
-        return FoodPreference(record[0], record[1], record[2], record[3])
+        records.close()
+        return FoodPreference(record[0], record[1], record[3], record[2])

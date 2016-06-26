@@ -16,6 +16,9 @@ class FoodDBManager(metaclass=Singleton):
                                      port=3306, user=dbAcountManager.ID, passwd=dbAcountManager.PW,\
                                      db='recommend', charset='utf8')
 
+    def __del__(self):
+        self._conn.close()
+
     def searchFoodAttributesByFoodID(self, foodID):
         '''
         FoodAttribute Table에 접근하여 Food ID(integer)를 이용해 해당 음식의 속성을 반환
@@ -32,6 +35,7 @@ class FoodDBManager(metaclass=Singleton):
             contents = [content.strip() for content in record[1].split(',')]
             result[record[0]] = set(contents)
 
+        records.close()
         return result
 
     def searchPreferencedFoodAttributesListByUserID(self, userID):
@@ -42,6 +46,7 @@ class FoodDBManager(metaclass=Singleton):
         '''
 
         result = []
+
         foodIDs = self._foodPreferenceDBManager.searchFoodIDsByUserID(userID)
 
         for foodID in foodIDs:
@@ -63,4 +68,21 @@ class FoodDBManager(metaclass=Singleton):
         for record in records:
             result[record[0]] = float(record[1])
 
+        records.close()
         return result
+
+    def searchFoodNameByFoodID(self, foodID):
+        '''
+        Food Table에 접근하여 음식 이름을 반환
+        :param foodID: 음식 ID (integer)
+        :return: 음식 이름 (string)
+        '''
+
+
+        records = self._conn.cursor()
+        records.execute("SELECT Food.Name FROM Food WHERE ID=" + str(foodID))
+
+        record = [record for record in records]
+
+        records.close()
+        return record[0][0]

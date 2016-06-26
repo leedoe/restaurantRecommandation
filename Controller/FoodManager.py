@@ -35,3 +35,12 @@ class FoodManager(metaclass=Singleton):
         :return: 음식 속성 가중치 (dictionary)
         '''
         return self._foodDBManager.searchFoodAttributeWeights()
+
+
+    def getFoodNameByFoodID(self, foodID):
+        '''
+        음식 ID에 대한 음식 이름을 반환
+        :param foodID: 음식 ID (integer)
+        :return: 음식 이름 (string)
+        '''
+        return self._foodDBManager.searchFoodNameByFoodID(foodID)
