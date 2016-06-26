@@ -16,7 +16,7 @@ urlpatterns = [
         kwargs={'template_name': 'webTemplates/loginPage.html', 'authentication_form': LoginForm}),
     url(r'^logout/', 'django.contrib.auth.views.logout', name='logout', kwargs={'next_page': '/'}),
     url(r'^registration/$',views.UserRegister, name="signup"),
-    url(r'^perfer/$', views.perfer, name='perfer'),
+    url(r'^prefer/$', views.prefer, name='perfer'),
     url(r'^main/$', views.main_page, name='main'),
 ]
 

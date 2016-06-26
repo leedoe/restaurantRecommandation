@@ -5,11 +5,19 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from web.forms import registerForm
 from web.models import UserInfo, Food, UserFoodPreference
+from web.pyscript.Controller.RecommendationEngine import RecommendationEngine
+from web.pyscript.Model.User import User
+from web.pyscript.Model.RecommendationQueue import RecommendationQueue
 
 
 # Create your views here.
 def main_page(request):
-    return render(request, 'webTemplates/main.html')
+    user = request.user
+    requestingUser = User(user.pk, user.username, user.password, user.age)
+    reQueue = RecommendationEngine().getFoodRecommendationQueue(requestingUser)
+    reco = RecommendationEngine().runMapping(reQueue, '홍대')
+
+    return render(request, 'webTemplates/main.html', {'user':user, 'relist': reco, 'reque': reQueue})
 
 
 def UserRegister(request):
@@ -33,7 +41,7 @@ def UserRegister(request):
     return render(request, 'webTemplates/userRegisteration.html', {"userform": userform})
 
 
-def perfer(request):
+def prefer(request):
     user = request.user
 
     if request.is_ajax():
