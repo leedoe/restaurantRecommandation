@@ -66,7 +66,7 @@ class RestaurantFeature:
 
     @contents.setter
     def contents(self, contents):
-        self._contents = set([content.strip() for content in contents.split(',')])
+        self._contents = [content.strip() for content in contents.split(',')]
 
     @contents.deleter
     def contents(self):
