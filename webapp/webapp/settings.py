@@ -83,8 +83,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME': 'django',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'ssu310',
+        'PASSWORD': 'soongsil',
         'HOST': 'project.czpuraarclth.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306'
     }
@@ -132,7 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'web.UserInfo'
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/perfer'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

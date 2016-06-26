@@ -31,14 +31,17 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
                 <div class="u-form-group">
-                    {{ userform.username }}
+                    id: {{ userform.username }}
                 </div>
                 <div class="u-form-group">
-                    {{ userform.password1 }}
+                    password: {{ userform.password1 }}
                 </div>
                 <div class="u-form-group">
-                    {{ userform.password2 }}
+                    passwordchk: {{ userform.password2 }}
                 </div>
+				<div class="u-form-group">
+					age: {{ userform.age }}
+				</div>
 
                 <div id="space">
                     {% if form.errors %}

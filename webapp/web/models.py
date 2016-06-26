@@ -35,10 +35,10 @@ class FoodAttribute(models.Model):
 class UserFoodPreference(models.Model):
     userID = models.ForeignKey(UserInfo)
     foodID = models.ForeignKey(Food)
-    score = models.FloatField()
+    score = models.IntegerField()
 
     def __str__(self):
-        return str(self.userID) + " " + str(self.foodID)
+        return str(self.userID) + " " + str(self.foodID) + " " +str(self.score)
 
 
 # Restaurant
