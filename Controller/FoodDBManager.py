@@ -70,3 +70,19 @@ class FoodDBManager(metaclass=Singleton):
 
         records.close()
         return result
+
+    def searchFoodNameByFoodID(self, foodID):
+        '''
+        Food Table에 접근하여 음식 이름을 반환
+        :param foodID: 음식 ID (integer)
+        :return: 음식 이름 (string)
+        '''
+
+
+        records = self._conn.cursor()
+        records.execute("SELECT Food.Name FROM Food WHERE ID=" + str(foodID))
+
+        record = [record for record in records]
+
+        records.close()
+        return record[0][0]
