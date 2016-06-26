@@ -20,7 +20,7 @@ class RestaurantFeature:
         for content in self.contents:
             contents += content + ', '
         contents = contents[:-2]
-        return "FoodAttribute(ID = %d, RestaurantID = %d, FeatureName = %s, contents = %s)" \
+        return "RestaurantFeature(ID = %d, RestaurantID = %d, FeatureName = %s, contents = %s)" \
                % (self.ID, self.restaurantID, self.name, contents)
 
 

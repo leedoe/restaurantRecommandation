@@ -1,5 +1,0 @@
-1, aa@aa.com, 1234, 10
-2, bb@bb.com, 2345, 20
-3, cc@cc.com, 3456, 30
-4, dd@dd.com, 4567, 40
-5, ee@ee.com, 5678, 50
