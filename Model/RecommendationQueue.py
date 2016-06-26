@@ -3,6 +3,8 @@
 import copy
 from Controller.FoodPreferenceManager import FoodPreferenceManager
 from Controller.FoodManager import FoodManager
+from Model.RecommendationInfo import RecommendationInfo
+from Model.GroupInfo import GroupInfo
 from math import exp
 
 class RecommendationQueue:
@@ -10,10 +12,8 @@ class RecommendationQueue:
     '''
     static 영역
     '''
-    MAX_OF_GROUP_INFO = 5 # tuple에 넣어서 보여줄 그룹의 정보 최대 개수
     TOP = 1 # queue의 TOP이며, 코드에서 명시적으로 나타내기 위한 상수
     WEIGHT = {'SCORE': 4.0, 'ATTR': 3.0, 'MEAN': 2.0} # 추천 점수에 필요한 각 가중치, SCORE = 사용자가 준 평점, ATTR = 속성, MEAN = 총 평가 점수 평균
-    GROUPINFO = {'NAME': 0, 'MEAN': 1, 'COUNT': 2, 'GROUPS': 3} # 큐에 저장되어 있는 tuple에 접근하기 위한 각 인덱스
 
 
     def __init__(self, user, foodSet, foodDict):
@@ -32,20 +32,23 @@ class RecommendationQueue:
         self._user = user
 
         # 추천 가능성이 있는 각 음식들을 queue에 넣는 작업을 시작함
-        for food in foodSet:
-            totalScore = totalCount = 0 # 해당 음식의 총점과 카운트는 0으로
+        for foodID in foodSet:
 
             # 각 음식에 대한 평균과 모든 그룹의 총합, 카운트를 구함
-            for groupInfo in foodDict[food]:
-                totalScore += groupInfo[1]
-                totalCount += groupInfo[2]
-                groupInfo[1] /= groupInfo[2]
+            for recommendationGroupInfo in foodDict[foodID].groupInfos:
+                foodDict[foodID].mean += recommendationGroupInfo.mean
+                foodDict[foodID].count += recommendationGroupInfo.count
+                recommendationGroupInfo.mean /= recommendationGroupInfo.count
 
-            foodDict[food].sort(key=lambda groupInfo : groupInfo[1], reverse=True) # 평균을 기준으로 내림차순으로 정렬
-            del(foodDict[food][RecommendationQueue.MAX_OF_GROUP_INFO:]) # 최대 보여줄 그룹의 정보만 남김
+            foodDict[foodID].mean /= foodDict[foodID].count # 총 평균을 구함
 
-            # 추천 정보는 tuple로 저장
-            recommendationInfo = copy.copy((food, totalScore / totalCount, totalCount, foodDict[food]))
+            foodDict[foodID].sortGroupInfos(False) # 평균을 기준으로 내림차순으로 정렬
+            foodDict[foodID].rstripGroupInfos() # 최대 보여줄 그룹의 정보만 남김
+
+            # foodDict에 있던 정보를 복사하여 queue에 넣음
+            recommendationInfo = copy.copy(foodDict[foodID])
+            del foodDict[foodID]
+
             self._add(recommendationInfo) # 추천 정보를 queue에 삽입
 
 
@@ -92,24 +95,29 @@ class RecommendationQueue:
         :return: 음식 추천 점수
         '''
         WEIGHT = RecommendationQueue.WEIGHT
-        GROUPINFO = RecommendationQueue.GROUPINFO
-        targetFoodAttribute = self._foodManager.getFoodAttributeByFoodName(recommendationInfo[GROUPINFO['NAME']]) # dictionaires
-        userFoodPreferenceAttributes = self._foodManager.getFoodPreferenceAttributesByUserID(self._user.ID) # dictionaries의 list
+
+
+        # 이미 추천 점수를 계산했으면 그 점수를 그대로 반환
+        if recommendationInfo.score:
+            return recommendationInfo.score
+
+
+        targetFoodAttribute = self._foodManager.getFoodAttributesByFoodID(recommendationInfo.foodID) # dictionaires
+        userFoodPreferenceAttributes = self._foodManager.getPreferencedFoodAttributesListByUserID(self._user.ID) # dictionaries의 list
         attributeNames = targetFoodAttribute.keys()
 
-        score = 0.0
 
         #1. 유저가 평가한 음식의 속성, target 음식의 속성의 교집합의 합을 구함
         sumOfAttributesIntersection = 0
         for userFoodPreferenceAttribute in userFoodPreferenceAttributes:
             for attributeName in attributeNames:
                 # 사용자 선호 음식과 target 음식의 속성들의 교집합 개수들의 합을 구함.
-                if not userFoodPreferenceAttribute[attributeName] == None:
-                    sumOfAttributesIntersection += userFoodPreferenceAttribute[attributeName] & targetFoodAttribute[attributeName]
+                if userFoodPreferenceAttribute.get(attributeName):
+                    sumOfAttributesIntersection += len(userFoodPreferenceAttribute[attributeName] & targetFoodAttribute[attributeName])
 
         #2. 총 평가 점수와 그에 따른 패널티 적용
-        penalty = 2.0 / (1.0 + exp(-0.05 * recommendationInfo[GROUPINFO['COUNT']]))
-        targetFoodMean = recommendationInfo[GROUPINFO['MEAN']]
+        penalty = 2.0 / (1.0 + exp(-0.05 * recommendationInfo.count))
+        targetFoodMean = recommendationInfo.mean
 
 
         #3. 사용자의 해당 음식에 대한 평가 점수가 존재할 시, 그에 대한 가산, 감산 점수
@@ -118,9 +126,9 @@ class RecommendationQueue:
         userAdditionalScore = 0.0
 
         #4. 추천 점수 계산
-        score = WEIGHT['ATTR'] * sumOfAttributesIntersection + WEIGHT['MEAN'] * targetFoodMean * penalty + userAdditionalScore
+        recommendationInfo.score = WEIGHT['ATTR'] * sumOfAttributesIntersection + WEIGHT['MEAN'] * targetFoodMean * penalty + userAdditionalScore
 
-        return score
+        return recommendationInfo.score
 
 
 
@@ -140,12 +148,12 @@ class RecommendationQueue:
         while 2 * cursor < len(self._queue):
             # 1. 오른쪽 자식이 존재하고, 오른쪽 자식이 왼쪽 자식의 점수보다 크고, 오른쪽 자식이 부모의 점수보다 클 경우
             if (2 * cursor + 1 < len(self._queue)) \
-                and (self._getRecommendationScore(2 * cursor + 1) > self._getRecommendationScore(2 * cursor)) \
-                and (self._getRecommendationScore(2 * cursor + 1) > self._getRecommendationScore(cursor)):
+                and (self._getRecommendationScore(self._queue[2 * cursor + 1]) > self._getRecommendationScore(self._queue[2 * cursor])) \
+                and (self._getRecommendationScore(self._queue[2 * cursor + 1]) > self._getRecommendationScore(self._queue[cursor])):
                 self._swap(cursor, 2 * cursor + 1)
                 cursor = 2 * cursor + 1
             # 2. 1이 아닐 때, 왼쪽 자식이 부모의 점수보다 클 경우
-            elif self._getRecommendationScore(2 * cursor) > self._getRecommendationScore(cursor):
+            elif self._getRecommendationScore(self._queue[2 * cursor]) > self._getRecommendationScore(self._queue[cursor]):
                 self._swap(cursor, 2 * cursor)
                 cursor = 2 * cursor
             # 3. 부모가 자식보다 점수가 클 경우
@@ -155,10 +163,12 @@ class RecommendationQueue:
         return result
 
 
-
-
-
-
-
-
-
+    def isEmpty(self):
+        '''
+        음식 추천 큐가 비었는지 확인해줌
+        :return: True = empty, False = not empty (boolean)
+        '''
+        if len(self._queue) <= 1:
+            return True
+        else:
+            return False

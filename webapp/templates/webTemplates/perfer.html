@@ -1,0 +1,108 @@
+{% load range_tag %}
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <title>선호도 입력</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+<div style="text-align:center;">
+	{{ user }}
+  <div class="foodInfo" id="foodInfo" >
+    <table class="foodTable" >
+      <tr>
+		<th>id</th>
+        <th>음식 이미지</th>
+        <th>음식 명</th>
+        <th>별점</th>
+      </tr>
+	  {% for item, perfer, score, num in foodlist %}
+		<tr>
+			<td class="foodID">{{ item.id }}</td>
+			<td> image</td>
+			<td>{{ item.name }}</td>
+			<td>
+			{% if perfer == None %}
+				<p class="star_rating">
+    				<a href="#">★</a>
+    				<a href="#">★</a>
+    				<a href="#">★</a>
+    				<a href="#">★</a>
+    				<a href="#">★</a>
+				</p>
+			{% else %}
+				<p class="star_rating">
+					{% for i in score|get_range %}
+					<a href="#" class="on">★</a>
+					{% endfor %}
+					{% for i in num|get_range %}
+					<a href="#">★</a>
+					{% endfor %}
+				</p>
+			{% endif %}
+			</td>
+		</tr>
+	  {% endfor %}
+    <!--  
+	<tr>
+        <td class="foodTable"><img class="foodImg" id="food" name="food" src="짜장면.jpg" width="100" height="100"></td>
+        <td class="foodTable" width="200px">짜장면</td>
+        <form name = "foodGrade">
+          <td class="foodTable">
+			<img class="star" id="star" name="star" src="star.jpg" width="50" height="50" stus='off' style="cursor:pointer"  onclick='fncClick(this);'> 
+			<img class="star" id="star" name="star" src="star.jpg" width="50" height="50" stus='off' style="cursor:pointer"  onclick='fncClick(this);'>
+			<img class="star" id="star" name="star" src="star.jpg" width="50" height="50" stus='off' style="cursor:pointer"  onclick='fncClick(this);'>
+			<img class="star" id="star" name="star" src="star.jpg" width="50" height="50" stus='off' style="cursor:pointer"  onclick='fncClick(this);'> 
+			<img class="star" id="star" name="star" src="star.jpg" width="50" height="50" stus='off' style="cursor:pointer"  onclick='fncClick(this);'>
+          </td>
+        </form>
+      </tr>
+	-->
+     
+    </table>
+  </div>
+</div>
+<a href="/main">평가완료</a>
+<!--<script type="text/javascript" src="foodPreference.js"></script>-->
+<style>
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.star_rating a:first-child {margin-left:0;}
+.star_rating a.on {color:#777;}
+</style>
+<script>
+$.ajaxSetup({data: {
+	csrfmiddlewaretoken: '{{ csrf_token }}'
+}});
+
+$( ".star_rating a" ).click(function() {
+     $(this).parent().children("a").removeClass("on");
+     $(this).addClass("on").prevAll("a").addClass("on");
+	 var test = $(this).parent().parent().parent().children(".foodID").text();
+	 var grade =$(this).parent().children(this).index(this) 
+
+	 $.ajax({
+		type:'post',
+		url: '',
+		dataType:'html',
+		data:{
+			foodid: test,
+			grade: grade,
+		},
+		success:function(data){
+			alert("평가 되었습니다");
+		}
+	}) 
+     return false;
+});
+</script>
+</body>
+</html>
