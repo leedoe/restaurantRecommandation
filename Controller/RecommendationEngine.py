@@ -69,6 +69,7 @@ class RecommendationEngine(metaclass=Singleton):
 
         #7. 실제 사용할 데이터들을 tuple화 함
         result = (dict(), list())  # 앞은 추천 음식 정보, 뒤는 식당 정보
+        result[0]['foodID'] = recommendedFood.foodID
         result[0]['foodName'] = recommendedFoodName
         result[0]['recommendationScore'] = recommendedFood.score
         result[0]['mean'] = mean
