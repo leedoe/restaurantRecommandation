@@ -6,10 +6,4 @@ from Model.User import User
 user = User(22, 'aa@aa.com', '1234', 10)
 recommendedFood = RecommendationEngine().getFoodRecommendationQueue(user)
 
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
-print(RecommendationEngine().runMapping(recommendedFood, '홍대'))
+print(RecommendationEngine().getWordCloudList(recommendedFood, 20))

@@ -91,10 +91,22 @@ class RecommendationEngine(metaclass=Singleton):
         return result
 
 
+    def getWordCloudList(self, recommendationQueue, numOfWords):
+        '''
+        워드클라우드에 사용할 단어 리스트를 반환
+        :param recommendationQueue: 음식 추천 Queue (RecommendationQueue Class instance)
+        :param numOfWords: 단어를 얻을 개수 (integer)
+        :return: list[음식 이름, 추천 점수] (list)
+        '''
+        result = []
 
+        for iteration in range(numOfWords):
+            recommendationInfo = recommendationQueue.pop()
+            foodName = self._foodManager.getFoodNameByFoodID(recommendationInfo.foodID)
 
+            result.append([foodName, recommendationInfo.score])
 
-
+        return result
 
 
     def getFoodRecommendationQueue(self, user):
