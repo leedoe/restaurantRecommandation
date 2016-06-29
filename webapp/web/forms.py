@@ -8,7 +8,7 @@ from web.models import UserInfo
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
-        max_length=8,
+        max_length=10,
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'ID',

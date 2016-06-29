@@ -1,0 +1,68 @@
+<li class="list-group-item">
+	<div>
+	<div class="row">
+		<div class="col-md-6"><img src="/media/{{relist.0.foodID}}.png"></div>
+		<div class="col-md-6">
+		<table class="table">
+			<tr>
+				<th>추천음식</th>
+				<td>{{ relist.0.foodName }}</td> 
+			</tr>
+			<tr>
+				<th>점수</th>
+				<td>{{ relist.0.recommendationScore }}</td>
+			</tr>
+			<tr>
+				<th>평가 수</th>
+				<td>{{ relist.0.count }}</td>
+			</tr>
+			<tr>
+				<th>전체 평점</th>
+				<td>{{ relist.0.mean }}</td>
+			</tr>
+			<tr>
+				<th>내가 속한 그룹 평점</th>
+				<td>{{ relist.0.groupWholeMean }}</td>
+			</tr>
+			<tr>
+				<th>내가 속한 그룹에서 평가 수</th>
+				<td>{{relist.0.groupWholeCount }}</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+		<h3>내가 평가한 음식 중 추천 음식을 평가한 사람이 평가한 음식들</h3> 
+		<table class="table table-hover">
+		<thead>
+			<th>평가한 음식</th>
+			<th>음식 평점</th>
+			<th>평가 수</th>
+		</thead>
+		<tbody>
+		{% for item in relist.0.groupInfos %}
+		 <tr>
+			<td>{{ item.0 }}</td>
+			<td>{{ item.1 }}</td>
+			<td>{{ item.2 }}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+
+		<h3>식당 추천</h3>
+		<table class="table">
+			<tr>
+				<th>식당 이름</th>
+				<th>식당 주소</th>
+				<th>식당 전화번호</th>
+			</tr>
+		{% for item in relist.1 %}
+			<tr>
+				<td><a href="https://search.naver.com/search.naver?where=nexearch&query={{item.1.주소}}&sm=top_hty&fbm=0&ie=utf8" target="_blank">{{ item.0 }}</a></td>
+				<td>{{ item.1.주소 }}</td>
+				<td>{{ item.1.전화번호 }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+</li>

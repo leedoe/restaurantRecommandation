@@ -42,3 +42,6 @@ class RestaurantManager(metaclass=Singleton):
         :return: RestaurantFeature Class instances (list)
         '''
         return self._restaurantDBManager.searchRestaurantFeaturesByRestaurantID(restaurantID)
+
+    def refresh(self):
+        self._restaurantDBManager.refresh()

@@ -1,8 +1,14 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="ko-kr">
     <head>
         <meta charset = "UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+		<script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
+
+		<link href="{% static 'css/jquery-ui/jquery-ui.css' %}" rel="stylesheet">
+
 		<!-- 합쳐지고 최소화된 최신 CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -17,6 +23,7 @@
 			<ul class="nav nav-tabs">
 				<li role="presentation" class="active"><a href="/main">추천</a></li>
 				<li role="presentation"><a href="/prefer/">선호도 입력</a></li>
+				<li role="presentation"><a href="#" class="pref">선호도</a></li>
 				<li role="presentation"><a href="/logout/">로그아웃</a></li>
 			</ul>
 			<!--{{user.username}}  | <a href="/logout">로그아웃</a>-->
@@ -25,17 +32,71 @@
 			
 
 			<ul class="list-group">
-				<li class="list-group-item">
-					<div>
-						추천음식정보
-					</div>
-					<div>
-						추천식당 목록
-					</div>
-				</li>
-				<li class="list-group-item">Second item</li>
-				<li class="list-group-item">Third item</li>
+				
 			</ul>
+			<select class="form-control" id="location">
+				<option value="강남">강남</option>
+				<option value="홍대">홍대</option>
+			</select>
+			<button class="btn btn-default addHtml" type="submit">추천받기</button>
 		</div>
+
+		<div id="dialog" title="선호도">
+			<iframe src="/wc/" width='400px' height='400px'></iframe>
+		</div>
+		<script>
+			$.ajaxSetup({data: {
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			}});
+			
+			var countH = 0;
+			var countG = 0;
+
+
+			$(".addHtml").click(function(e){
+				var location = $('#location option:selected').val()
+				var count = 0;
+
+				if(location == "강남"){
+					count = countH++;
+				}else{
+					count = countG++;
+				}
+
+				$.ajax({
+					type:'post',
+					url:'',
+					dataType:'html',
+					data: {
+						co: count,
+						loca: location,
+						csrfmiddlewaretoken: '{{ csrf_token }}'
+					},
+					success:function(data){
+						$(".list-group").append(data)
+					}
+				})
+			});
+
+			$(function() {
+				$( "#dialog" ).dialog({
+					minHeight: 450,
+					minWidth: 450,
+					autoOpen: false,
+					show: {
+					effect: "blind",
+					duration: 1000
+					},
+					hide: {
+						effect: "blind",
+						duration: 1000
+					}
+				});
+
+				$(".pref" ).click(function() {
+					$( "#dialog" ).dialog( "open" );
+				});
+			});
+		</script>
     </body>
 </html>

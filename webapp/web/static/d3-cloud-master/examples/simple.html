@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<body>
+<script src="../lib/d3/d3.js"></script> 
+<script src="../d3.layout.cloud.js"></script> 
+<script>
+  var fill = d3.scale.category20();
+function wordCloudStart(foodRecommendResult){
+	var foodNameList = [],foodScoreList = [];
+	for(var i in foodRecommendResult){
+		foodNameList[i] = foodRecommendResult[i][0];
+		foodScoreList[i] = foodRecommendResult[i][1];
+		//alert(""+i+"이름:"+foodNameList[i]+",점수:"+foodScoreList[i]);
+	}
+  d3.layout.cloud().size([300, 300])
+      .words(
+		foodNameList
+		.map(
+			function(d) {
+				var index = foodNameList.indexOf(d);
+        		return {text: d, size: 5 + foodScoreList[index] * 10};
+      		}
+	  	)
+	  )
+      .padding(5)
+      .rotate(function() { return (Math.random() * 1) * 90; })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();		
+}
+
+  function draw(words) {
+    d3.select("body").append("svg")
+        .attr("width", 600)
+        .attr("height", 600)
+      .append("g")
+        .attr("transform", "translate(120,150)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+  
+  
+  
+  
+  
+  
+  ////////////////
+  var tmp = new Array(6);
+  tmp[0] = new Array(2);
+	tmp[0][0]="김치";
+	tmp[0][1]=2.5;
+	
+  tmp[1] = new Array(2);
+	tmp[1][0]="라면";
+	tmp[1][1]=3.8;
+	
+  tmp[2] = new Array(2);
+	tmp[2][0]="족발";
+	tmp[2][1]=1.2;
+	
+  tmp[3] = new Array(2);
+	tmp[3][0]="고기";
+	tmp[3][1]=4.7;
+	
+  tmp[4] = new Array(2);
+	tmp[4][0]="순대";
+	tmp[4][1]=3.9;
+	
+tmp[5] = new Array(2);
+	tmp[5][0]="떡볶이";
+	tmp[5][1]=5.0;
+	
+	wordCloudStart(tmp);
+</script> 

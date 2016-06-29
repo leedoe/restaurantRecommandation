@@ -84,7 +84,7 @@ class RecommendationEngine(metaclass=Singleton):
             features = dict()
             for feature in restaurantInfo[1]:
                 features[feature.name] = feature.contents
-                result[1].append((restaurantInfo[0].name, features))
+            result[1].append((restaurantInfo[0].name, features))
 
 
         return result
