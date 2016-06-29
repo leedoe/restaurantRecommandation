@@ -69,6 +69,7 @@ class RecommendationEngine(metaclass=Singleton):
 
         #7. 실제 사용할 데이터들을 tuple화 함
         result = (dict(), list())  # 앞은 추천 음식 정보, 뒤는 식당 정보
+        result[0]['foodID'] = recommendedFood.foodID
         result[0]['foodName'] = recommendedFoodName
         result[0]['recommendationScore'] = recommendedFood.score
         result[0]['mean'] = mean
@@ -90,10 +91,22 @@ class RecommendationEngine(metaclass=Singleton):
         return result
 
 
+    def getWordCloudList(self, recommendationQueue, numOfWords):
+        '''
+        워드클라우드에 사용할 단어 리스트를 반환
+        :param recommendationQueue: 음식 추천 Queue (RecommendationQueue Class instance)
+        :param numOfWords: 단어를 얻을 개수 (integer)
+        :return: list[음식 이름, 추천 점수] (list)
+        '''
+        result = []
 
+        for iteration in range(numOfWords):
+            recommendationInfo = recommendationQueue.pop()
+            foodName = self._foodManager.getFoodNameByFoodID(recommendationInfo.foodID)
 
+            result.append([foodName, recommendationInfo.score])
 
-
+        return result
 
 
     def getFoodRecommendationQueue(self, user):
