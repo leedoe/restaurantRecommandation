@@ -1,0 +1,29 @@
+<div class="post-preview">
+	<h2 class="post-title">{{ item.name }}</h2>
+	<img src="/media/{{item.id}}.png" width='200px'>
+	<table class = "table table-striped">
+	<thead>
+		<tr>
+			<th>이름</th>
+			<th>주소</th>
+			<th>전화번호</th>
+		<tr>
+	</thead>
+	<tbody>
+	{% for resList in res%}
+			<!--
+			<li>
+			<a href='https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery={{resList.name}} {{resList.address}}&ie=utf8&query={{resList.name}} {{resList.address}}'>{{resList.name}}</a>
+			{{resList.address}}
+			</li>
+			-->
+			<tr>
+				<td>{{resList.name}}</td>
+				<td>{{resList.address}}</td>
+				<td>{{resList.telephone}}</td>
+			</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+</div>
+<hr>

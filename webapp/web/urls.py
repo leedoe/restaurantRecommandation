@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^registration/$',views.UserRegister, name="signup"),
     url(r'^prefer/$', views.prefer, name='perfer'),
     url(r'^main/$', views.main_page, name='main'),
+    url(r'^ajax/$', views.ajax_form, name='ajax'),
     url(r'^wc/$', views.wordCloud, name='wc')
 ]

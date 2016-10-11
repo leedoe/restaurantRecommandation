@@ -7,11 +7,10 @@ from web.models import UserInfo
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(
-        max_length=10,
+    username = forms.EmailField(
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'ID',
+                'placeholder': 'Email',
             }
         )
     )
@@ -25,10 +24,10 @@ class LoginForm(AuthenticationForm):
 
 
 class UserCreateForm(UserCreationForm):
-    username = forms.CharField(
+    username = forms.EmailField(
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'ID',
+                'placeholder': 'Email',
             }
         )
     )
@@ -66,7 +65,36 @@ class UserCreateForm(UserCreationForm):
 
 
 class registerForm(forms.Form):
-    username = forms.CharField(label = 'ID', max_length=15)
-    password1 = forms.CharField(label='password', widget=forms.PasswordInput())
-    password2 = forms.CharField(label='password check', widget=forms.PasswordInput())
-    age = forms.CharField(label='age', max_length=3)
+    username = forms.EmailField(
+        label = 'ID',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Email',
+            }
+        )
+    )
+    password1 = forms.CharField(
+        label='password',
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Password',
+            }
+        )
+    )
+    password2 = forms.CharField(
+        label='password check',
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Password',
+            }
+        )
+    )
+    age = forms.CharField(
+        label='age',
+        max_length=3,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Age',
+            }
+        )
+    )
