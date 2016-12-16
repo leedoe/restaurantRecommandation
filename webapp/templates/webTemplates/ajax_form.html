@@ -1,6 +1,7 @@
 <div class="post-preview">
 	<h2 class="post-title">{{ item.name }}</h2>
 	<img src="/media/{{item.id}}.png" width='200px'>
+	<h3 style='text-align: center; padding: 10px;'>예상점수: {{ avg }}</h3>
 	<table class = "table table-striped">
 	<thead>
 		<tr>
@@ -11,12 +12,6 @@
 	</thead>
 	<tbody>
 	{% for resList in res%}
-			<!--
-			<li>
-			<a href='https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery={{resList.name}} {{resList.address}}&ie=utf8&query={{resList.name}} {{resList.address}}'>{{resList.name}}</a>
-			{{resList.address}}
-			</li>
-			-->
 			<tr>
 				<td>{{resList.name}}</td>
 				<td>{{resList.address}}</td>
@@ -25,5 +20,77 @@
 	{% endfor %}
 	</tbody>
 	</table>
+	<div id='{{ item }}' style="width:100%; height:400px">
+	</div>
 </div>
 <hr>
+
+<script>
+var mapOptions = {
+    center: new naver.maps.LatLng(37.5666805, 126.9784147),
+    zoom: 5
+};
+
+var map{{ item }} = new naver.maps.Map('{{ item }}', mapOptions);
+
+var latlens = [];
+var markerList = [];
+var resInfo = [];
+
+{% for code in mapcode %}
+	latlens.push(new naver.maps.LatLng({{code.y}}, {{code.x}}));
+{% endfor %}
+
+{% for resList in res %}
+	var contentString = [
+		'<div class="iw_inner">',
+		'	<h3> {{ resList.name }} </h3>',
+		'	<p> <span>{{resList.address}}</span> <br>',
+		'	전화번호: {{ resList.telephone }}',
+		'	</p>',
+		'</div>'
+	].join('');
+
+	var infowindow = new naver.maps.InfoWindow({
+		content: contentString,
+		maxWidth: 1024
+	});
+
+	resInfo.push(infowindow);
+
+	contentString = null;
+	infowindow = null;
+{% endfor %}
+
+naver.maps.Event.addListener(map{{item}}, 'idle', function(){
+	updateMakers(map{{item}}, markerList);
+});
+
+for(var i = 0; i < latlens.length; i++){
+	var marker = new naver.maps.Marker({
+		position: latlens[i],
+		map: map{{item}},
+	});
+
+	markerList.push(marker);
+
+	marker = null;
+}
+
+function getClickHandler(seq){
+	return function(e){
+		var marker = markerList[seq],
+		infoWindow = resInfo[seq];
+
+		if(infoWindow.getMap()){
+			infoWindow.close();
+		}else{
+			infoWindow.open(map{{item}}, marker);
+		}
+	}
+}
+
+for(var i = 0, ii = markerList.length; i < ii; i++){
+	naver.maps.Event.addListener(markerList[i], 'click', getClickHandler(i));
+}
+</script>

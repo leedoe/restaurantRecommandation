@@ -30,6 +30,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=roCnpNLInf37Lz76VwbT"></script>
+
 </head>
 
 <body>
@@ -138,6 +140,7 @@
                     dataType: 'html',
                     data:{
                         rank: rankNumber,
+                        clusterID: {{ clusterId }}
                     },
                     success: function(html) {
                         $('#post-preview').append(html);
@@ -160,6 +163,7 @@
 						dataType: 'html',
                         data:{
                             rank: rankNumber,
+                            clusterID: {{ clusterId }}
                         },
 						success: function(html) {
 							$('#post-preview').append(html);

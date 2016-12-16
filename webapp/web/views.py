@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, Context, RequestContext
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
+from django.db import connection
 
 from web.forms import registerForm
 from web.models import UserInfo, FoodInfo, UserEvaluations, FoodRecommendations, RestaurantMenus, RestaurantInfo
@@ -13,66 +14,74 @@ from web.pyscript.Controller.RecommendationEngine import RecommendationEngine
 from web.pyscript.Model.User import User
 from web.pyscript.Model.RecommendationQueue import RecommendationQueue
 
+import urllib.request
+from urllib.parse import quote
+import json
+
 # Create your views here.
 def main_page(request):
     user = request.user
-    #requestingUser = User(user.pk, user.username, user.password, user.age)
-    #reQueue = RecommendationEngine().getFoodRecommendationQueue(requestingUser)
+    clusterId = user.cluster_id
 
-    #relistH = []
-    #relistG = []
-    #for item in range(1, 10):
-    #    relistH.append(RecommendationEngine().runMapping(reQueue, '홍대'))
-    #    relistG.append(RecommendationEngine().runMapping(reQueue, '강남'))
-
-    #if request.is_ajax():
-    #    if request.POST:
-    #        count = int(request.POST['co'])
-            
-    #        if request.POST['loca'] == '강남':
-    #            addContent = relistG[count]
-    #        else:
-    #            addContent = relistH[count]
-            
-    #        tpl = loader.get_template('webTemplates/index.html')
-    #        ctx = Context({'relist': addContent})
-
-    #        return HttpResponse(tpl.render(ctx))
-
-
-    return render(request, 'webTemplates/index.html', {'user':user })
+    return render(request, 'webTemplates/index.html', {'user':user, 'clusterId': user.cluster_id})
 
 
 def ajax_form(request):
     rank = int(request.POST['rank'])
+    clusterId = int(request.POST['clusterID'])
 
     try:
         foodID = FoodRecommendations.objects.get(recommendation=rank)
     except FoodRecommendations.DoesNotExist:
         return HttpResponse()
-    print(foodID.foodID)
-    print(type(foodID.pk))
-    #foodInfo = FoodInfo.objects.get(id = foodID.pk)
-    #print(foodInfo.name)
-    foodInfo = FoodInfo.objects.raw('select * from web_foodinfo where id = %s', [foodID.pk])[0]
-    print(foodInfo)
     
-    '''
-    for row in foodInfo:
-        name = row['name']
-        print(name)
-    '''
+    foodInfo = FoodInfo.objects.get(id = foodID.pk)
+    
+    #expectedScore
+    avgScore = None
+    with connection.cursor() as cursor:
+        cursor.execute(
+                'select avg(usereval.score) as id ' +
+                'from django.web_userevaluations usereval ' +
+                'inner join django.web_userinfo userinfo on usereval.userID_id = userinfo.id ' +
+                'where userinfo.cluster_id_id = ' + str(clusterId) +
+                ' and usereval.foodID_id = ' +str(foodID.pk))
+        avgScore = cursor.fetchone()
 
-    #resID = RestaurantMenus.objects.filter(foodId = foodID.pk)
-    resID = RestaurantMenus.objects.raw('select * from web_restaurantmenus where foodId_id = %s', [foodID.pk])
-    print(resID)
+    resID = RestaurantMenus.objects.filter(foodId = foodID.pk)
 
     resInfo = list()
+    mapcode = list()
+
+    #geocoder
+    client_id = 'roCnpNLInf37Lz76VwbT'
+    client_secret = 'w0OdkWpu9p'
+    
 
     for item in resID:
-            resInfo.append(RestaurantInfo.objects.get(id = item.restaurantId_id))
+            temp = RestaurantInfo.objects.get(id = item.restaurantId_id)
+            resInfo.append(temp)
 
-    value = RequestContext(request, {'item': foodInfo, 'res': resInfo})
+            url = 'https://openapi.naver.com/v1/map/geocode?query=' + quote(temp.address)
+
+            requestGeo = urllib.request.Request(url)
+
+            requestGeo.add_header("X-Naver-Client-Id", client_id)
+            requestGeo.add_header("X-Naver-Client-Secret", client_secret)
+
+            response = urllib.request.urlopen(requestGeo)
+            response_body = response.read().decode('UTF-8')
+
+            content = json.loads(response_body)
+
+            mapcode.append(content['result']['items'][0]['point'])
+
+    
+
+    print(mapcode)
+
+
+    value = RequestContext(request, {'item': foodInfo, 'res': resInfo, 'avg': avgScore[0], 'mapcode': mapcode})
     template = loader.get_template('webTemplates/ajax_form.html')
     output = template.render(value)
     return HttpResponse(output)
@@ -116,37 +125,38 @@ def prefer(request):
     
     fl = list()
     #foodlist = FoodInfo.objects.all()
+
     foodlist = list();
-    foodlist.append(FoodInfo.objects.get(id=21))
-    foodlist.append(FoodInfo.objects.get(id=75))
-    foodlist.append(FoodInfo.objects.get(id=83))
+    foodlist.append(FoodInfo.objects.get(id=20))
+    foodlist.append(FoodInfo.objects.get(id=72))
+    foodlist.append(FoodInfo.objects.get(id=80))
     foodlist.append(FoodInfo.objects.get(id=12))
+    foodlist.append(FoodInfo.objects.get(id=38))
     foodlist.append(FoodInfo.objects.get(id=40))
+    foodlist.append(FoodInfo.objects.get(id=37))
+    foodlist.append(FoodInfo.objects.get(id=24))
     foodlist.append(FoodInfo.objects.get(id=42))
-    foodlist.append(FoodInfo.objects.get(id=39))
-    foodlist.append(FoodInfo.objects.get(id=25))
-    foodlist.append(FoodInfo.objects.get(id=44))
-    foodlist.append(FoodInfo.objects.get(id=23))
-    foodlist.append(FoodInfo.objects.get(id=59))
-    foodlist.append(FoodInfo.objects.get(id=43))
+    foodlist.append(FoodInfo.objects.get(id=22))
+    foodlist.append(FoodInfo.objects.get(id=57))
+    foodlist.append(FoodInfo.objects.get(id=41))
     foodlist.append(FoodInfo.objects.get(id=2))
     foodlist.append(FoodInfo.objects.get(id=15))
     foodlist.append(FoodInfo.objects.get(id=16))
-    foodlist.append(FoodInfo.objects.get(id=54))
-    foodlist.append(FoodInfo.objects.get(id=85))
-    foodlist.append(FoodInfo.objects.get(id=86))
-    foodlist.append(FoodInfo.objects.get(id=61))
-    foodlist.append(FoodInfo.objects.get(id=71))
-    foodlist.append(FoodInfo.objects.get(id=98))
+    foodlist.append(FoodInfo.objects.get(id=52))
+    foodlist.append(FoodInfo.objects.get(id=82))
+    foodlist.append(FoodInfo.objects.get(id=83))
+    foodlist.append(FoodInfo.objects.get(id=59))
+    foodlist.append(FoodInfo.objects.get(id=68))
+    foodlist.append(FoodInfo.objects.get(id=95))
     foodlist.append(FoodInfo.objects.get(id=5))
     foodlist.append(FoodInfo.objects.get(id=6))
+    foodlist.append(FoodInfo.objects.get(id=34))
+    foodlist.append(FoodInfo.objects.get(id=19))
+    foodlist.append(FoodInfo.objects.get(id=60))
     foodlist.append(FoodInfo.objects.get(id=36))
-    foodlist.append(FoodInfo.objects.get(id=20))
-    foodlist.append(FoodInfo.objects.get(id=62))
-    foodlist.append(FoodInfo.objects.get(id=38))
-    foodlist.append(FoodInfo.objects.get(id=91))
-    foodlist.append(FoodInfo.objects.get(id=82))
-    foodlist.append(FoodInfo.objects.get(id=37))
+    foodlist.append(FoodInfo.objects.get(id=88))
+    foodlist.append(FoodInfo.objects.get(id=79))
+    foodlist.append(FoodInfo.objects.get(id=35))
 
     for item in foodlist:
         try:
